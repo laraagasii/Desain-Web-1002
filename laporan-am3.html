@@ -1,0 +1,667 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Laporan Praktikum 3 - Aplikasi Mobile</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        :root {
+            --copper-gold: #B99470;
+            --olive-green: #A9B388;
+            --ivory: #FEFAE0;
+            --light-gray: #D3D3D3;
+            --text-dark: #2e2e2e;
+            --text-light: #ffffff;
+        }
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--ivory);
+            color: var(--text-dark);
+            scroll-behavior: smooth;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            overflow-x: hidden;
+        }
+        .main-content-wrapper {
+            margin-left: 250px;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 250px;
+            height: 100vh;
+            background-color: var(--light-gray);
+            color: var(--text-dark);
+            padding: 20px 0;
+            box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+        }
+        nav .navbar-brand {
+            text-align: center;
+            display: block;
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin-bottom: 30px;
+            color: var(--text-dark);
+        }
+        nav .nav-link {
+            color: var(--text-dark);
+            font-weight: 500;
+            display: block;
+            margin: 10px 0;
+            padding: 10px 20px;
+            border-radius: 5px;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+        nav .nav-link:hover {
+            background-color: var(--olive-green);
+            color: var(--text-light);
+        }
+        nav .nav-link.active {
+            background-color: var(--olive-green);
+            color: var(--text-light);
+        }
+        header {
+            background-color: var(--copper-gold);
+            color: var(--text-light);
+            padding: 50px 50px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            text-align: center;
+            flex-shrink: 0;
+        }
+        header h1 {
+            font-size: 4rem;
+            font-weight: 600;
+        }
+        header p {
+            font-size: 1.2rem;
+            font-weight: 300;
+        }
+        section {
+            padding: 60px 50px;
+            flex-grow: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            text-align: left;
+        }
+        .report-detail-content {
+            background-color: var(--light-gray);
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+            width: 100%;
+            max-width: 900px;
+            line-height: 1.8;
+        }
+        .report-detail-content h2 {
+            color: var(--copper-gold);
+            margin-bottom: 25px;
+            text-align: center;
+        }
+        .report-detail-content h4 {
+            color: var(--olive-green);
+            margin-top: 30px;
+            margin-bottom: 15px;
+        }
+        .report-detail-content p, .report-detail-content ul, .report-detail-content ol {
+            margin-bottom: 15px;
+        }
+        .report-detail-content pre {
+            background-color: var(--text-dark);
+            color: var(--text-light);
+            padding: 15px;
+            border-radius: 5px;
+            overflow-x: auto;
+            margin-bottom: 20px;
+        }
+        .report-detail-content img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 5px;
+            margin-top: 15px;
+        }
+        footer {
+            background-color: var(--copper-gold);
+            color: var(--text-light);
+            padding: 20px 50px;
+            text-align: center;
+            width: 100%;
+            flex-shrink: 0;
+        }
+
+        /* ====== OVERRIDE kecil agar gambar grid tampil lebar (full kontainer) ====== */
+        .report-detail-content .row.g-4 > .col-md-4 {
+            flex: 0 0 100%;
+            max-width: 100%;
+        }
+
+        @media (max-width: 768px) {
+            .main-content-wrapper { margin-left: 0; }
+            body { display: block; }
+            nav {
+                position: static;
+                width: 100%;
+                height: auto;
+                box-shadow: none;
+                padding: 10px 0;
+            }
+            nav .navbar-brand { margin-bottom: 15px; }
+            nav .nav-link { text-align: center; padding: 8px 15px; }
+            header, section, footer { padding: 30px 20px; margin-left: 0; }
+            header h1 { font-size: 2.5rem; }
+            header p { font-size: 1rem; }
+            .report-detail-content { padding: 20px; }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <a class="navbar-brand" href="index.html">Lara's Page</a>
+        <ul class="nav flex-column">
+            <li class="nav-item"><a class="nav-link" href="index.html#about">About</a></li>
+            <li class="nav-item"><a class="nav-link" href="index.html#skills">Skills</a></li>
+            <li class="nav-item"><a class="nav-link" href="index.html#passion">Passion</a></li>
+            <li class="nav-item"><a class="nav-link" href="index.html#Portofolio">Portofolio</a></li>
+            <li class="nav-item"><a class="nav-link" href="index.html#pengalaman">Experience</a></li>
+            <li class="nav-item"><a class="nav-link active" href="laporanPraktikum.html">Laporan Praktikum</a></li>
+            <li class="nav-item"><a class="nav-link" href="index.html#contact">Contact</a></li>
+        </ul>
+    </nav>
+
+    <div class="main-content-wrapper">
+        <header>
+            <div>
+                <h1>Praktikum 3: Input Widgets dan Basic Form</h1>
+                <p>Membuat form dasar, menerima, dan mengelola input dari pengguna di Flutter</p>
+            </div>
+        </header>
+
+        <section class="container my-5">
+            <div class="report-detail-content">
+                <h2>PRAKTIKUM 3</h2>
+                <p class="text-center"><b>Input Widgets dan Basic Form</b></p>
+
+                <h4>1.1 Tujuan</h4>
+                <p>Tujuan praktikum ini yaitu mahasiswa mampu membuat basic form untuk menerima inputan dari keyboard dan mengelola inputan:</p>
+                <ul>
+                    <li>Membuat beberapa input widgets.</li>
+                    <li>Membuat dan mengontrol inputan dari user.</li>
+                </ul>
+
+                <h4>1.2 Alat</h4>
+                <ul>
+                    <li>Computer/laptop yang telah terinstall lingkungan flutter development.</li>
+                </ul>
+                
+                <h4>1.3 Teori</h4>
+                
+                <h5>TextField</h5>
+                <p>Widget dasar untuk menerima input teks dari keyboard.</p>
+                
+                <h5>TextFormField</h5>
+                <p>Versi lengkap dari TextField yang secara otomatis terintegrasi dengan logika validasi dan manajemen state dari sebuah <code>Form</code>.Fiturnya antara lain:</p>
+                <ul>
+                    <li>Memiliki properti <code>validator</code> untuk memeriksa input.</li>
+                    <li>Menampilkan pesan error secara otomatis jika validasi gagal.</li>
+                    <li>Berinteraksi dengan <code>FormState</code> untuk melakukan validasi kolektif.</li>
+                </ul>
+                
+                <h5>GlobalKey&lt;FormState&gt;</h5>
+                <p><code>GlobalKey</code> merupakan objek unik yang digunakan untuk mengidentifikasi dan mengakses <code>FormState</code>.<code>FormState</code> adalah kelas yang mengelola status dari <code>Form</code>, seperti status validasi setiap field.Method <code>validate()</code> pada <code>FormState</code> digunakan untuk menjalankan validasi pada setiap <code>TextFormField</code> di dalam <code>Form</code>.</p>
+                
+                <h5>setState()</h5>
+                <p><code>setState()</code> adalah method yang memberitahu Flutter bahwa state internal dari sebuah <code>StatefulWidget</code> telah berubah, sehingga widget tersebut perlu di-render ulang (rebuild) untuk menampilkan perubahan.</p>
+                
+                <h5>Kata Kunci `const`</h5>
+                <p>Kata kunci <code>const</code> pada widget digunakan untuk membuat widget menjadi konstanta pada saat kompilasi (compile-time).Penggunaan <code>const</code> dapat meningkatkan performa karena widget akan dibuat sekali dan disimpan di memori, sehingga dapat digunakan kembali tanpa perlu build ulang.</p>
+
+                <h4>1.4 Langkah-langkah</h4>
+
+                <h5>Praktikum 1: Basic Form dengan TextField</h5>
+                <h6>1. Membuat Tampilan Awal</h6>
+                <p>Buat file baru <code>form_textfield.dart</code> di dalam folder <code>lib</code> dan buat tampilan dasar form menggunakan kode berikut.</p>
+                 <pre><code>import 'package:flutter/material.dart';
+
+void main() => runApp(const MyApp());
+
+class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      home: Scaffold(
+        appBar: AppBar(
+          title: const Text('Basic Form'),
+        ),
+        body: const MyForm(),
+      ),
+    );
+  }
+}
+
+class MyForm extends StatefulWidget {
+  const MyForm({super.key});
+
+  @override
+  State<MyForm> createState() => _MyFormState();
+}
+
+class _MyFormState extends State<MyForm> {
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.all(20.0),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          const Text('Masukkan nama anda :'),
+          const SizedBox(height: 10),
+          const TextField(
+            decoration: InputDecoration(
+                labelText: 'Nama Lengkap',
+                hintText: 'Misalnya masnoer',
+                border: OutlineInputBorder(),
+                prefixIcon: Icon(Icons.person)),
+          ),
+          const SizedBox(height: 20),
+          ElevatedButton(
+            onPressed: () {},
+            style: ElevatedButton.styleFrom(
+                backgroundColor: Colors.amber, foregroundColor: Colors.black),
+            child: const Text('Tampilkan nama'),
+          )
+        ],
+      ),
+    );
+  }
+}</code></pre><h6>2. Menambahkan TextEditingController</h6>
+                <p>Pada class <code>_MyFormState</code>, tambahkan controller untuk mengambil dan membersihkan inputan.Controller berfungsi untuk mengambil inputan dari user.Method `dispose()` digunakan untuk membersihkan teks inputan.</p>
+                <pre><code>final TextEditingController _textEditingController = TextEditingController();
+
+@override
+void dispose() {
+  _textEditingController.dispose();
+  super.dispose();
+}</code></pre><h6>3. Menghubungkan Controller ke TextField</h6>
+                <p>Tambahkan property <code>controller</code> pada widget <code>TextField</code> untuk menghubungkannya dengan controller yang telah dibuat.</p>
+                <pre><code>TextField(
+  controller: _textEditingController,
+  // ... properti lainnya
+),</code></pre>
+
+                <h6>4. Menambahkan Aksi pada Tombol</h6>
+                <p>Ubah method <code>onPressed</code> pada <code>ElevatedButton</code> untuk mengambil teks dari controller dan menampilkannya dalam sebuah <code>SnackBar</code>.</p>
+                <pre><code>onPressed: () {
+  String inputText = _textEditingController.text;
+  ScaffoldMessenger.of(context).showSnackBar(
+    SnackBar(content: Text('Nama anda adalah, $inputText')),
+  );
+},</code></pre><div class="img-placeholder" alt="Hasil Akhir Form dengan TextField"></div><hr>
+
+                <h5>Praktikum 2: Basic Form dengan TextFormField</h5>
+                <h6>1. Membuat Tampilan Awal</h6>
+                <p>Buat file baru <code>form_textformfield.dart</code> dan buat tampilan awal dengan dua <code>TextFormField</code> dan satu tombol.</p>
+                <div class="img-placeholder" alt="Tampilan Awal Form dengan TextFormField"></div>
+                
+                <h6>2. Menambahkan State Management</h6>
+                <p>Pada class state (misal: <code>_MyFormTextState</code>), tambahkan <code>GlobalKey</code> untuk form, controller untuk setiap field, dan method untuk submit.</p>
+                <pre><code>final _formKey = GlobalKey<FormState>();final _nameController = TextEditingController();final _emailController = TextEditingController();@override
+void dispose() {_nameController.dispose();_emailController.dispose();super.dispose();}
+
+void _submitForm() {if (_formKey.currentState!.validate()) {String name = _nameController.text;String email = _emailController.text;ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Validasi $name, $email Berhasil')),);
+  }
+}</code></pre>
+
+                <h6>3. Menambahkan Form Key dan Validator</h6>
+                <p>Bungkus <code>Column</code> dengan widget <code>Form</code> dan berikan <code>_formKey</code>.Kemudian, tambahkan properti <code>validator</code> pada setiap <code>TextFormField</code>.</p>
+                <b>TextFormField untuk Nama:</b>
+                <pre><code>TextFormField(
+  controller: _nameController,decoration: const InputDecoration(
+      labelText: "Nama", border: OutlineInputBorder()),validator: (value) {if (value == null || value.isEmpty) {return 'Masukkan nama anda';}
+    return null;},
+),</code></pre><b>TextFormField untuk Email:</b>
+                <pre><code>TextFormField(
+  controller: _emailController,decoration: const InputDecoration(
+      labelText: "Email", border: OutlineInputBorder()),validator: (value) {if (value == null || value.isEmpty) {return 'Masukkan email anda';}
+    if (!value.contains('@')) {return 'Email tidak valid';}
+    return null;},
+),</code></pre><h6>4. Menghubungkan Aksi Tombol</h6>
+                <p>Panggil method <code>_submitForm</code> dari <code>onPressed</code> pada <code>ElevatedButton</code>.</p>
+                <pre><code>ElevatedButton(
+  onPressed: _submitForm, child: const Text('Submit')
+)</code></pre>
+                <div class="img-placeholder" alt="Hasil Akhir Form dengan Validasi"></div><h6>5. Kode Program Lengkap</h6>
+                <pre><code>import 'package:flutter/material.dart';
+
+void main() => runApp(const MyApp());
+
+class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      home: Scaffold(
+        appBar: AppBar(
+          title: const Text("Basic Form TextFormField"),
+        ),
+        body: const MyFormText(),
+      ),
+    );
+  }
+}
+
+class MyFormText extends StatefulWidget {
+  const MyFormText({super.key});
+
+  @override
+  State<MyFormText> createState() => _MyFormTextState();
+}
+
+class _MyFormTextState extends State<MyFormText> {
+  final _formKey = GlobalKey<FormState>();
+  final _nameController = TextEditingController();
+  final _emailController = TextEditingController();
+
+  @override
+  void dispose() {
+    _nameController.dispose();
+    _emailController.dispose();
+    super.dispose();
+  }
+
+  void _submitForm() {
+    if (_formKey.currentState!.validate()) {
+      String name = _nameController.text;
+      String email = _emailController.text;
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('Validasi $name, $email Berhasil')),
+      );
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Form(
+      key: _formKey,
+      child: Padding(
+        padding: const EdgeInsets.all(20.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            TextFormField(
+              controller: _nameController,
+              decoration: const InputDecoration(
+                  labelText: "Nama", border: OutlineInputBorder()),
+              validator: (value) {
+                if (value == null || value.isEmpty) {
+                  return 'Masukkan nama anda';
+                }
+                return null;
+              },
+            ),
+            const SizedBox(height: 10),
+            TextFormField(
+              controller: _emailController,
+              decoration: const InputDecoration(
+                  labelText: "Email", border: OutlineInputBorder()),
+              validator: (value) {
+                if (value == null || value.isEmpty) {
+                  return 'Masukkan email anda';
+                }
+                if (!value.contains('@')) {
+                  return 'Email tidak valid';
+                }
+                return null;
+              },
+            ),
+            const SizedBox(height: 20),
+            SizedBox(
+              width: double.infinity,
+              child: ElevatedButton(
+                onPressed: _submitForm,
+                child: const Text('Submit'),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+</code></pre><h4>1.5 Latihan/Tugas</h4>
+                <h4>Pengerjaan Tugas Modul 3: Form Pendaftaran (Kelas B)</h4><p>Sesuai dengan instruksi, dibuat sebuah form pendaftaran pengguna yang terdiri dari field nama, email, password, dan konfirmasi password.Aplikasi ini menggunakan `StatefulWidget` untuk mengelola input dan validasi pada setiap `TextFormField`.Validasi memastikan email mengandung format '@' dan password cocok dengan konfirmasi password.</p>
+        
+        <h5>Langkah Pengerjaan</h5>
+        <ol>
+            <li>
+                <strong>File `main.dart`:</strong> File ini berfungsi sebagai titik masuk aplikasi dan mengatur `MaterialApp` untuk memanggil halaman form pendaftaran.</li>
+            <li>
+                <strong>File `user_registration_form.dart`:</strong> File ini berisi `StatefulWidget` utama.<ul>
+                    <li>Menggunakan `GlobalKey<FormState>` untuk mengelola dan memvalidasi form.</li>
+                    <li>Menggunakan `TextEditingController` untuk setiap input field, yang penting untuk membandingkan nilai password dan konfirmasi password.</li>
+                    <li>Menerapkan fungsi `validator` pada setiap `TextFormField` sesuai dengan persyaratan.</li>
+                    <li>Membuat method `_submitForm` yang akan dipanggil oleh tombol "Submit" untuk memicu validasi.</li>
+                </ul>
+            </li>
+        </ol>
+
+        <h5>Kode Program Lengkap</h5>
+
+        <h6>File: `main.dart`</h6>
+        <pre><code>import 'package:flutter/material.dart';
+import 'user_registration_form.dart'; // Impor file form
+
+void main() {
+  runApp(const MyApp());
+}
+
+class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: 'Form Pendaftaran',
+      theme: ThemeData(
+        primarySwatch: Colors.blue,
+      ),
+      // Atur home ke widget form pendaftaran
+      home: const UserRegistrationForm(),
+    );
+  }
+}
+</code></pre><h6>File: `user_registration_form.dart`</h6>
+        <pre><code>import 'package:flutter/material.dart';
+
+// Gunakan StatefulWidget sesuai instruksi
+class UserRegistrationForm extends StatefulWidget {
+  const UserRegistrationForm({super.key});
+
+  @override
+  State<UserRegistrationForm> createState() => _UserRegistrationFormState();
+}
+
+class _UserRegistrationFormState extends State<UserRegistrationForm> {
+  // GlobalKey untuk mengelola state Form
+  final _formKey = GlobalKey<FormState>();
+
+  // Controller untuk setiap TextFormField
+  final _nameController = TextEditingController();
+  final _emailController = TextEditingController();
+  final _passwordController = TextEditingController();
+  final _confirmPasswordController = TextEditingController();
+
+  @override
+  void dispose() {
+    // Bersihkan controller saat widget tidak lagi digunakan
+    _nameController.dispose();
+    _emailController.dispose();
+    _passwordController.dispose();
+    _confirmPasswordController.dispose();
+    super.dispose();
+  }
+
+  // Method yang dipanggil saat tombol ditekan
+  void _submitForm() {
+    // `validate()` akan memicu semua fungsi validator di dalam Form
+    if (_formKey.currentState!.validate()) {
+      // Jika semua validasi berhasil, tampilkan SnackBar
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Pendaftaran Berhasil!')),
+      );
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Form Pendaftaran Pengguna'),
+      ),
+      body: Form(
+        key: _formKey, // Hubungkan GlobalKey dengan Form
+        child: SingleChildScrollView( // Agar bisa di-scroll jika layar kecil
+          padding: const EdgeInsets.all(20.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              // TextFormField untuk Nama
+              TextFormField(
+                controller: _nameController,
+                decoration: const InputDecoration(
+                  labelText: 'Nama Lengkap',
+                  border: OutlineInputBorder(),
+                ),
+                validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    return 'Nama tidak boleh kosong';
+                  }
+                  return null;
+                },
+              ),
+              const SizedBox(height: 16.0),
+
+              // TextFormField untuk Email
+              TextFormField(
+                controller: _emailController,
+                decoration: const InputDecoration(
+                  labelText: 'Email',
+                  border: OutlineInputBorder(),
+                ),
+                keyboardType: TextInputType.emailAddress,
+                validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    return 'Email tidak boleh kosong';
+                  }
+                  // Validasi email harus mengandung format '@'
+                  if (!value.contains('@')) {
+                    return 'Format email tidak valid';
+                  }
+                  return null;
+                },
+              ),
+              const SizedBox(height: 16.0),
+
+              // TextFormField untuk Password
+              TextFormField(
+                controller: _passwordController,
+                obscureText: true, // Sembunyikan teks password
+                decoration: const InputDecoration(
+                  labelText: 'Password',
+                  border: OutlineInputBorder(),
+                ),
+                validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    return 'Password tidak boleh kosong';
+                  }
+                  if (value.length < 6) {
+                    return 'Password minimal 6 karakter';
+                  }
+                  return null;
+                },
+              ),
+              const SizedBox(height: 16.0),
+
+              // TextFormField untuk Konfirmasi Password
+              TextFormField(
+                controller: _confirmPasswordController,
+                obscureText: true,
+                decoration: const InputDecoration(
+                  labelText: 'Konfirmasi Password',
+                  border: OutlineInputBorder(),
+                ),
+                validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    return 'Konfirmasi password tidak boleh kosong';
+                  }
+                  // Validasi password dan confirm password harus sama
+                  if (value != _passwordController.text) {
+                    return 'Password tidak cocok';
+                  }
+                  return null;
+                },
+              ),
+              const SizedBox(height: 24.0),
+
+              // Tombol Submit
+              ElevatedButton(
+                // Panggil _submitForm saat tombol ditekan
+                onPressed: _submitForm,
+                style: ElevatedButton.styleFrom(
+                  padding: const EdgeInsets.symmetric(vertical: 16.0),
+                ),
+                child: const Text('Submit'),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
+</code></pre>
+
+                 <p class="mt-4"><a href="laporanPraktikum.html">Kembali ke Daftar Laporan</a></p>
+                </div>
+            </section>
+
+            <footer>
+                <p>&copy; 2024 Lara. Built with love and Bootstrap 5.</p>
+            </footer>
+        </div>
+
+        <!-- Modal Gambar -->
+        <div class="modal fade" id="imageModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-xl">
+            <div class="modal-content bg-transparent border-0">
+            <img id="modalImage" class="img-fluid rounded" alt="Preview">
+            </div>
+        </div>
+        </div>
+
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+        <script>
+        // Fungsi untuk menampilkan gambar ke modal (dipanggil dari onclick pada <img>)
+        function showImage(imgEl) {
+            const modalImg = document.getElementById('modalImage');
+            modalImg.src = imgEl.src;
+            modalImg.alt = imgEl.alt || 'Preview';
+        }
+        </script>
+    </body>
+    </html>

@@ -1,0 +1,547 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RESTful API</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        :root {
+            --copper-gold: #B99470;
+            --olive-green: #A9B388;
+            --ivory: #FEFAE0;
+            --light-gray: #D3D3D3;
+            --text-dark: #2e2e2e;
+            --text-light: #ffffff;
+        }
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--ivory);
+            color: var(--text-dark);
+            scroll-behavior: smooth;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            overflow-x: hidden;
+        }
+        .main-content-wrapper {
+            margin-left: 250px;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 250px;
+            height: 100vh;
+            background-color: var(--light-gray);
+            color: var(--text-dark);
+            padding: 20px 0;
+            box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+        }
+        nav .navbar-brand {
+            text-align: center;
+            display: block;
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin-bottom: 30px;
+            color: var(--text-dark);
+        }
+        nav .nav-link {
+            color: var(--text-dark);
+            font-weight: 500;
+            display: block;
+            margin: 10px 0;
+            padding: 10px 20px;
+            border-radius: 5px;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+        nav .nav-link:hover {
+            background-color: var(--olive-green);
+            color: var(--text-light);
+        }
+        nav .nav-link.active {
+            background-color: var(--olive-green);
+            color: var(--text-light);
+        }
+        header {
+            background-color: var(--copper-gold);
+            color: var(--text-light);
+            padding: 50px 50px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            text-align: center;
+            flex-shrink: 0;
+        }
+        header h1 {
+            font-size: 4rem;
+            font-weight: 600;
+        }
+        header p {
+            font-size: 1.2rem;
+            font-weight: 300;
+        }
+        section {
+            padding: 60px 50px;
+            flex-grow: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            text-align: left;
+        }
+        .report-detail-content {
+            background-color: var(--light-gray);
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+            width: 100%;
+            max-width: 900px;
+            line-height: 1.8;
+        }
+        .report-detail-content h2 {
+            color: var(--copper-gold);
+            margin-bottom: 25px;
+            text-align: center;
+        }
+        .report-detail-content h4 {
+            color: var(--olive-green);
+            margin-top: 30px;
+            margin-bottom: 15px;
+        }
+        .report-detail-content p, .report-detail-content ul, .report-detail-content ol {
+            margin-bottom: 15px;
+        }
+        .report-detail-content pre {
+            background-color: var(--text-dark);
+            color: var(--text-light);
+            padding: 15px;
+            border-radius: 5px;
+            overflow-x: auto;
+            margin-bottom: 20px;
+        }
+        footer {
+            background-color: var(--copper-gold);
+            color: var(--text-light);
+            padding: 20px 50px;
+            text-align: center;
+            width: 100%;
+            flex-shrink: 0;
+        }
+        @media (max-width: 768px) {
+            .main-content-wrapper {
+                margin-left: 0;
+            }
+            body {
+                display: block;
+            }
+            nav {
+                position: static;
+                width: 100%;
+                height: auto;
+                box-shadow: none;
+                padding: 10px 0;
+            }
+            nav .navbar-brand {
+                margin-bottom: 15px;
+            }
+            nav .nav-link {
+                text-align: center;
+                padding: 8px 15px;
+            }
+            header, section, footer {
+                padding: 30px 20px;
+                margin-left: 0;
+            }
+            header h1 {
+                font-size: 2.5rem;
+            }
+            header p {
+                font-size: 1rem;
+            }
+            .report-detail-content {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <a class="navbar-brand" href="index.html">Lara's Page</a>
+        <ul class="nav flex-column">
+            <li class="nav-item">
+                <a class="nav-link" href="index.html#about">About</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="index.html#skills">Skills</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="index.html#passion">Passion</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="index.html#Portofolio">Portofolio</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="index.html#pengalaman">Experience</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link active" href="laporanPraktikum.html">Laporan Praktikum</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="index.html#contact">Contact</a>
+            </li>
+        </ul>
+    </nav>
+
+    <div class="main-content-wrapper">
+        <header>
+            <div>
+                <h1>RESTful API</h1>
+                <p>API CRUD Sederhana Menggunakan Framework Laravel</p>
+                <p>Hanifah Larama Agasi - 2311531002</p>
+            </div>
+        </header>
+
+        <section class="container my-5">
+            <div class="report-detail-content">
+                <h2>Detail Laporan</h2>
+                
+
+                <h4>Pendahuluan</h4>
+                    <p>API (Application Programming Interface) adalah sebuah antarmuka atau perantara yang memungkinkan dua aplikasi atau lebih untuk saling berkomunikasi dan bertukar data tanpa harus melakukan input manual. API berfungsi seperti penerjemah yang membantu aplikasi dengan bahasa berbeda agar bisa saling mengerti dan bekerja sama. Dengan API, sebuah aplikasi dapat mengakses fitur, layanan, atau data dari aplikasi lain secara langsung, sehingga proses pengembangan aplikasi menjadi lebih efisien dan cepat karena developer tidak perlu membuat semua fitur dari awal. Fungsi utama API adalah memperluas fungsionalitas aplikasi, mengintegrasikan aplikasi yang berbeda, menyediakan akses yang terstandarisasi dan aman, serta meningkatkan fleksibilitas dan keamanan dalam pengembangan perangkat lunak. Contohnya, aplikasi cuaca di ponsel Anda menggunakan API untuk mengambil data dari sistem badan meteorologi dan menampilkan informasi cuaca secara real-time</p>
+                    <p>Coba perhatikan ilustrasi API berikut:</p>
+                    <div class="row g-4">
+                        <div class="col-md-10">
+                            <div class="card shadow">
+                                <img src="img/tugas_api/1.png" class="card-img-top" alt="Project 1" 
+                                    data-bs-toggle="modal" data-bs-target="#imageModal" onclick="showImage(this)">
+                                </div>
+                            </div>
+                        </div>
+                    <p>Terdapat tiga komponen utama: Client, API, dan Server. Client diibaratkan sebagai pelanggan yang ingin memesan nasi goreng. Permintaan dari Client dikirimkan terlebih dahulu ke API, yang berperan sebagai pelayan atau perantara. API bertugas menerima dan memvalidasi permintaan tersebut sebelum meneruskannya ke Server, yang diibaratkan sebagai dapur tempat pesanan diproses. Setelah Server selesai memproses permintaan dan menghasilkan respons (misalnya, nasi goreng sudah siap), respons tersebut dikirimkan kembali ke API. Selanjutnya, API akan mengirimkan hasil akhir tersebut kembali ke Client. Dari alur ini, dapat disimpulkan bahwa API berfungsi sebagai penghubung yang memastikan permintaan dari Client dapat diteruskan ke Server, dan hasil dari Server dapat dikembalikan lagi ke Client dengan cara yang terstruktur dan efisien.</p>                    
+                    <p>RESTful API adalah sebuah gaya arsitektur dalam desain API yang memungkinkan aplikasi untuk berkomunikasi dan bertukar data melalui internet menggunakan protokol HTTP. RESTful API menggunakan prinsip-prinsip seperti arsitektur klien-server, komunikasi tanpa status (stateless), dan pengenalan sumber daya (resource) yang diidentifikasi melalui URL unik. Metode HTTP standar seperti GET (mengambil data), POST (mengirim data baru), PUT (memperbarui data), dan DELETE (menghapus data) digunakan untuk melakukan operasi pada sumber daya tersebut. RESTful API mengirimkan data dalam format yang umum seperti JSON atau XML sehingga mudah dipahami oleh berbagai platform. Fungsi utama RESTful API adalah memudahkan pertukaran data antara aplikasi secara efisien dan terstruktur, memungkinkan pengembangan aplikasi yang scalable, fleksibel, serta mendukung interoperabilitas antar sistem yang berbeda tanpa perlu menyimpan status klien di server</p>
+
+
+                <h4>Langkah-langkah</h4>
+                    <h3>1. Membuat Project Laravel dan membuat migrasi ke database</h3>
+                    <p>DI tutorial ini, kita akan membuat sebuah API CRUD dasar dengan konsep RESTful API. API akan dibangun dalam project Laravel. Disini, kita akan menginstal terlebih dahulu project laravel dari awal hingga API berhasil dibuat.
+                        Pertama-tama, install project Laravel menggunakan Laravel Installer atau Composer.
+                    </p>
+                    <p>Setelah Project selesai dibuat, selanjutnya yaitu membuat sebuah migrasi. Masukkan kode berikut ke terminal:</p>
+                    <div class="row g-4">
+                        <div class="col-md-10">
+                            <div class="card shadow">
+                                <img src="img/tugas_api/2.png" class="card-img-top" alt="Project 1" 
+                                    data-bs-toggle="modal" data-bs-target="#imageModal" onclick="showImage(this)">
+                                </div>
+                            </div>
+                        </div>
+                    <p>Setelah itu, tambahkan kode berikut kedalam migrasi:</p>
+                    <div class="row g-4">
+                        <div class="col-md-10">
+                            <div class="card shadow">
+                                <img src="img/tugas_api/3.png" class="card-img-top" alt="Project 1" 
+                                    data-bs-toggle="modal" data-bs-target="#imageModal" onclick="showImage(this)">
+                                </div>
+                            </div>
+                        </div>
+                    <p>Setelah file migrasi sudah dibuat, jalankan migrasi dengan cara masukkan kode berikut:</p>
+                    <div class="row g-4">
+                        <div class="col-md-10">
+                            <div class="card shadow">
+                                <img src="img/tugas_api/4.png" class="card-img-top" alt="Project 1" 
+                                    data-bs-toggle="modal" data-bs-target="#imageModal" onclick="showImage(this)">
+                                </div>
+                            </div>
+                        </div>
+                    <h3>Membuat model berdasarkan migrasi</h3>
+                    <p>Setelah berhasil melakukan migrasi database, selanjutnya membuat model dengan kode terminal berikut:L</p>         
+                    <div class="row g-4">
+                        <div class="col-md-10">
+                            <div class="card shadow">
+                                <img src="img/tugas_api/5.png" class="card-img-top" alt="Project 1" 
+                                    data-bs-toggle="modal" data-bs-target="#imageModal" onclick="showImage(this)">
+                                </div>
+                            </div>
+                        </div>
+                    <p>Setelah itu, masukkan kode berikut kedalam model yang telah dibuat:</p>\
+                    <div class="row g-4">
+                        <div class="col-md-10">
+                            <div class="card shadow">
+                                <img src="img/tugas_api/6.png" class="card-img-top" alt="Project 1" 
+                                    data-bs-toggle="modal" data-bs-target="#imageModal" onclick="showImage(this)">
+                                </div>
+                            </div>
+                        </div>
+                    <h3>Menginstall API Routes dan membuat Controller</h3>
+                    <p>Selanjutnya yaitu menginstall API Routes dengan menggunakan kode terminal berikut:</p>
+                    <div class="row g-4">
+                        <div class="col-md-10">
+                            <div class="card shadow">
+                                <img src="img/tugas_api/7.png" class="card-img-top" alt="Project 1" 
+                                    data-bs-toggle="modal" data-bs-target="#imageModal" onclick="showImage(this)">
+                                </div>
+                            </div>
+                        </div>
+                    <p>Kemudian, isi kode routes/api.php dengan kode berikut:</p>
+                    <div class="row g-4">
+                        <div class="col-md-10">
+                            <div class="card shadow">
+                                <img src="img/tugas_api/8.png" class="card-img-top" alt="Project 1" 
+                                    data-bs-toggle="modal" data-bs-target="#imageModal" onclick="showImage(this)">
+                                </div>
+                            </div>
+                        </div>
+                    <p>Lalu, buatlah controller sesuai dengan yang ada di api.php yaitu ProductController. Caranya denga menggunakan kode berikut:</p>
+                    <div class="row g-4">
+                        <div class="col-md-10">
+                            <div class="card shadow">
+                                <img src="img/tugas_api/9.png" class="card-img-top" alt="Project 1" 
+                                    data-bs-toggle="modal" data-bs-target="#imageModal" onclick="showImage(this)">
+                                </div>
+                            </div>
+                        </div>
+                    <p>Isi kode Controller yang telah dibuat dengan kode berikut:</p>
+                    <div class="row g-4">
+                        <div class="col-md-10">
+                            <div class="card shadow">
+                                <img src="img/tugas_api/10.png" class="card-img-top" alt="Project 1" 
+                                    data-bs-toggle="modal" data-bs-target="#imageModal" onclick="showImage(this)">
+                                </div>
+                            </div>
+                        </div>
+                    <div class="row g-4">
+                        <div class="col-md-10">
+                            <div class="card shadow">
+                                <img src="img/tugas_api/11.png" class="card-img-top" alt="Project 1" 
+                                    data-bs-toggle="modal" data-bs-target="#imageModal" onclick="showImage(this)">
+                                </div>
+                            </div>
+                        </div>
+                    <div class="row g-4">
+                        <div class="col-md-10">
+                            <div class="card shadow">
+                                <img src="img/tugas_api/12.png" class="card-img-top" alt="Project 1" 
+                                    data-bs-toggle="modal" data-bs-target="#imageModal" onclick="showImage(this)">
+                                </div>
+                            </div>
+                        </div>
+                    
+                    <h3>Membuat API Resource</h3>
+                    <p>Buat API resource dengan menggunakan kode berikut:</p>
+                    <div class="row g-4">
+                        <div class="col-md-10">
+                            <div class="card shadow">
+                                <img src="img/tugas_api/13.png" class="card-img-top" alt="Project 1" 
+                                    data-bs-toggle="modal" data-bs-target="#imageModal" onclick="showImage(this)">
+                                </div>
+                            </div>
+                        </div>
+                    <p>Isi ProductResource dengan Kode berikut:</p>
+                    <div class="row g-4">
+                        <div class="col-md-10">
+                            <div class="card shadow">
+                                <img src="img/tugas_api/14.png" class="card-img-top" alt="Project 1" 
+                                    data-bs-toggle="modal" data-bs-target="#imageModal" onclick="showImage(this)">
+                                </div>
+                            </div>
+                        </div>
+                    <p>Untuk menggunakan resource yang telah dibuat di controller, ubah function index() dan show() di ProductController seperti berikut:</p>
+                    <div class="row g-4">
+                        <div class="col-md-10">
+                            <div class="card shadow">
+                                <img src="img/tugas_api/15.png" class="card-img-top" alt="Project 1" 
+                                    data-bs-toggle="modal" data-bs-target="#imageModal" onclick="showImage(this)">
+                                </div>
+                            </div>
+                        </div>
+                    <div class="row g-4">
+                        <div class="col-md-10">
+                            <div class="card shadow">
+                                <img src="img/tugas_api/16.png" class="card-img-top" alt="Project 1" 
+                                    data-bs-toggle="modal" data-bs-target="#imageModal" onclick="showImage(this)">
+                                </div>
+                            </div>
+                        </div>
+                    <h3>Membuat validasi dan error handling</h3>
+                    <p>Selanjutnya yaitu membuat validasi berisi rules dan error handling API. Masukkan kode berikut di terminal:</p>
+                    <div class="row g-4">
+                        <div class="col-md-10">
+                            <div class="card shadow">
+                                <img src="img/tugas_api/17.png" class="card-img-top" alt="Project 1" 
+                                    data-bs-toggle="modal" data-bs-target="#imageModal" onclick="showImage(this)">
+                                </div>
+                            </div>
+                        </div>
+                    <p>Lalu, isi dengan kode berikut:</p>
+                    <div class="row g-4">
+                        <div class="col-md-10">
+                            <div class="card shadow">
+                                <img src="img/tugas_api/18.png" class="card-img-top" alt="Project 1" 
+                                    data-bs-toggle="modal" data-bs-target="#imageModal" onclick="showImage(this)">
+                                </div>
+                            </div>
+                        </div>
+                    <p>Kemudian, kita buat error handling dengan menambahkan kode berikut di app/Exceptions/Handler.php untuk menangani Exception:</p>
+                    <div class="row g-4">
+                        <div class="col-md-10">
+                            <div class="card shadow">
+                                <img src="img/tugas_api/19.png" class="card-img-top" alt="Project 1" 
+                                    data-bs-toggle="modal" data-bs-target="#imageModal" onclick="showImage(this)">
+                                </div>
+                            </div>
+                        </div>
+                    <h3>Installasi POSTMAN</h3>
+                    <p>Selanjutnya yaitu menggunakan aplikasi POSTMAN untuk mengambil data dan mengirimkan data ke API. Install aplikasi POSTMAN <a href="https://www.postman.com/downloads/">disini.</a></p>
+                    <p>Kemudian, nyalakan web server laravel dengan menggunakan kode terminal berikut:</p>
+                    <div class="row g-4">
+                        <div class="col-md-10">
+                            <div class="card shadow">
+                                <img src="img/tugas_api/20.png" class="card-img-top" alt="Project 1" 
+                                    data-bs-toggle="modal" data-bs-target="#imageModal" onclick="showImage(this)">
+                                </div>
+                            </div>
+                        </div>
+                    
+                    <h3>RESTful API Menggunakan POSTMAN</h3>
+                    <p>Saat pertama kali install, tampilan POSTMAN akan seperti ini:</p>
+                    <div class="row g-4">
+                        <div class="col-md-10">
+                            <div class="card shadow">
+                                <img src="img/tugas_api/21.png" class="card-img-top" alt="Project 1" 
+                                    data-bs-toggle="modal" data-bs-target="#imageModal" onclick="showImage(this)">
+                                </div>
+                            </div>
+                        </div>
+                    <p>Kemudian, untuk mengambil data dari API, gunakan Informasi berikut:</p>
+                    <p>URL: http://127.0.0.1:8000/api/products</p>
+                    <p>Method: GET</p>
+                    <p>Hasilnya akan seperti berikut:</p>
+                    <div class="row g-4">
+                        <div class="col-md-10">
+                            <div class="card shadow">
+                                <img src="img/tugas_api/22.png" class="card-img-top" alt="Project 1" 
+                                    data-bs-toggle="modal" data-bs-target="#imageModal" onclick="showImage(this)">
+                                </div>
+                            </div>
+                        </div>
+                    <p>Untuk menambahkan data ke API, gunakan informasi berikut:</p>
+                    <p>URL: http://127.0.0.1:8000/api/products</p>
+                    <p>Method: POST</p>
+                    <p>Contoh data yang dimasukkan adalah sebagai berikut:</p>
+                    <p>{ 
+                        "name": "Nescafe", <br>
+                        "description": "Nescafe Cappucino 125ml", <br>
+                        "price": 11000.00, <br>
+                        "stock": 100 <br>
+                        }</p>
+                    <p>Hasilnya akan seperti berikut:</p>
+                    <div class="row g-4">
+                        <div class="col-md-10">
+                            <div class="card shadow">
+                                <img src="img/tugas_api/23.png" class="card-img-top" alt="Project 1" 
+                                    data-bs-toggle="modal" data-bs-target="#imageModal" onclick="showImage(this)">
+                                </div>
+                            </div>
+                        </div>
+                    <p>Tambahkan kode berikut untuk validasi dan error handling saat input data:</p>
+                    <div class="row g-4">
+                        <div class="col-md-10">
+                            <div class="card shadow">
+                                <img src="img/tugas_api/24.png" class="card-img-top" alt="Project 1" 
+                                    data-bs-toggle="modal" data-bs-target="#imageModal" onclick="showImage(this)">
+                                </div>
+                            </div>
+                        </div>
+                    <p>Jika data yang dimasukkan salah, maka hasil yang ditampilkan akan seperti berikut:</p>
+                    <div class="row g-4">
+                        <div class="col-md-10">
+                            <div class="card shadow">
+                                <img src="img/tugas_api/25.png" class="card-img-top" alt="Project 1" 
+                                    data-bs-toggle="modal" data-bs-target="#imageModal" onclick="showImage(this)">
+                                </div>
+                            </div>
+                        </div>
+                    <p>Selanjutnya, menampilkan data dari id yang diinginkan. Gunakan Informasi berikut:</p>
+                    <p>URL: http://127.0.0.1:8000/api/products/1</p>
+                    <p>Method: GET</p>
+                    <p>Hasilnya adalah sebagai berikut:</p>
+                    <div class="row g-4">
+                        <div class="col-md-10">
+                            <div class="card shadow">
+                                <img src="img/tugas_api/26.png" class="card-img-top" alt="Project 1" 
+                                    data-bs-toggle="modal" data-bs-target="#imageModal" onclick="showImage(this)">
+                                </div>
+                            </div>
+                        </div>
+                    <p>Tambahkan kode validasi dan error handling jika id yang dicari tidak ada di database:</p>
+                    <div class="row g-4">
+                        <div class="col-md-10">
+                            <div class="card shadow">
+                                <img src="img/tugas_api/27.png" class="card-img-top" alt="Project 1" 
+                                    data-bs-toggle="modal" data-bs-target="#imageModal" onclick="showImage(this)">
+                                </div>
+                            </div>
+                        </div>
+                    <p>Maka, hasilnya adalah sebagai berikut:</p>
+                    <div class="row g-4">
+                        <div class="col-md-10">
+                            <div class="card shadow">
+                                <img src="img/tugas_api/28.png" class="card-img-top" alt="Project 1" 
+                                    data-bs-toggle="modal" data-bs-target="#imageModal" onclick="showImage(this)">
+                                </div>
+                            </div>
+                        </div>
+                    <p>Kemudian, untuk mengupdate data, gunakan informasi berikut:</p>
+                    <p>URL: http://127.0.0.1:8000/api/products/1</p>
+                    <p>Method: PUT</p>
+                    <p>Contoh data yang dimasukkan adalah sebagai berikut:</p>
+                    <p>{ 
+                        "name": "Kopi ABC", <br>
+                        "description": "ABC Kopi Susu 125ml", <br>
+                        "price": 5000.00, <br>
+                        "stock": 100 <br>
+                        }</p>
+                    <p>Hasilnya akan seperti berikut:</p>
+                    <div class="row g-4">
+                        <div class="col-md-10">
+                            <div class="card shadow">
+                                <img src="img/tugas_api/29.png" class="card-img-top" alt="Project 1" 
+                                    data-bs-toggle="modal" data-bs-target="#imageModal" onclick="showImage(this)">
+                                </div>
+                            </div>
+                        </div>
+                    <p>Terakhir, menghapus data. Gunakan informasi berikut:</p>
+                    <p>URL: http://127.0.0.1:8000/api/products/1</p>
+                    <p>Method: DELETE</p>
+                    <p>Hasilnya akan seperti berikut:</p>
+                    <div class="row g-4">
+                        <div class="col-md-10">
+                            <div class="card shadow">
+                                <img src="img/tugas_api/30.png" class="card-img-top" alt="Project 1" 
+                                    data-bs-toggle="modal" data-bs-target="#imageModal" onclick="showImage(this)">
+                                </div>
+                            </div>
+                        </div>
+<br>
+                    <p>Link Github: https://github.com/laraagasii/restfulapi-lara</p>
+                        
+
+                <p><a href="laporanPraktikum.html">Kembali ke Daftar Laporan</a></p>
+            </div>
+        </section>
+
+        <footer>
+            <p>&copy; 2024 Lara. Built with love and Bootstrap 5.</p>
+        </footer>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

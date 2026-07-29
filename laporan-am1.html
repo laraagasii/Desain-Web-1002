@@ -1,0 +1,722 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Laporan Praktikum 1 - Aplikasi Mobile</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        :root {
+            --copper-gold: #B99470;
+            --olive-green: #A9B388;
+            --ivory: #FEFAE0;
+            --light-gray: #D3D3D3;
+            --text-dark: #2e2e2e;
+            --text-light: #ffffff;
+        }
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--ivory);
+            color: var(--text-dark);
+            scroll-behavior: smooth;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            overflow-x: hidden;
+        }
+        .main-content-wrapper {
+            margin-left: 250px;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 250px;
+            height: 100vh;
+            background-color: var(--light-gray);
+            color: var(--text-dark);
+            padding: 20px 0;
+            box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+        }
+        nav .navbar-brand {
+            text-align: center;
+            display: block;
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin-bottom: 30px;
+            color: var(--text-dark);
+        }
+        nav .nav-link {
+            color: var(--text-dark);
+            font-weight: 500;
+            display: block;
+            margin: 10px 0;
+            padding: 10px 20px;
+            border-radius: 5px;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+        nav .nav-link:hover {
+            background-color: var(--olive-green);
+            color: var(--text-light);
+        }
+        nav .nav-link.active {
+            background-color: var(--olive-green);
+            color: var(--text-light);
+        }
+        header {
+            background-color: var(--copper-gold);
+            color: var(--text-light);
+            padding: 50px 50px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            text-align: center;
+            flex-shrink: 0;
+        }
+        header h1 {
+            font-size: 4rem;
+            font-weight: 600;
+        }
+        header p {
+            font-size: 1.2rem;
+            font-weight: 300;
+        }
+        section {
+            padding: 60px 50px;
+            flex-grow: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            text-align: left;
+        }
+        .report-detail-content {
+            background-color: var(--light-gray);
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+            width: 100%;
+            max-width: 900px;
+            line-height: 1.8;
+        }
+        .report-detail-content h2 {
+            color: var(--copper-gold);
+            margin-bottom: 25px;
+            text-align: center;
+        }
+        .report-detail-content h4 {
+            color: var(--olive-green);
+            margin-top: 30px;
+            margin-bottom: 15px;
+        }
+        .report-detail-content p, .report-detail-content ul, .report-detail-content ol {
+            margin-bottom: 15px;
+        }
+        .report-detail-content pre {
+            background-color: var(--text-dark);
+            color: var(--text-light);
+            padding: 15px;
+            border-radius: 5px;
+            overflow-x: auto;
+            margin-bottom: 20px;
+        }
+        .report-detail-content img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 5px;
+            margin-top: 15px;
+        }
+        footer {
+            background-color: var(--copper-gold);
+            color: var(--text-light);
+            padding: 20px 50px;
+            text-align: center;
+            width: 100%;
+            flex-shrink: 0;
+        }
+
+        /* ====== OVERRIDE kecil agar gambar grid tampil lebar (full kontainer) ====== */
+        .report-detail-content .row.g-4 > .col-md-4 {
+            flex: 0 0 100%;
+            max-width: 100%;
+        }
+        /* Pastikan gambar mengisi card */
+        .card-img-top { width: 100%; height: auto; object-fit: contain; }
+
+        @media (max-width: 768px) {
+            .main-content-wrapper { margin-left: 0; }
+            body { display: block; }
+            nav {
+                position: static;
+                width: 100%;
+                height: auto;
+                box-shadow: none;
+                padding: 10px 0;
+            }
+            nav .navbar-brand { margin-bottom: 15px; }
+            nav .nav-link { text-align: center; padding: 8px 15px; }
+            header, section, footer { padding: 30px 20px; margin-left: 0; }
+            header h1 { font-size: 2.5rem; }
+            header p { font-size: 1rem; }
+            .report-detail-content { padding: 20px; }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <a class="navbar-brand" href="index.html">Lara's Page</a>
+        <ul class="nav flex-column">
+            <li class="nav-item"><a class="nav-link" href="index.html#about">About</a></li>
+            <li class="nav-item"><a class="nav-link" href="index.html#skills">Skills</a></li>
+            <li class="nav-item"><a class="nav-link" href="index.html#passion">Passion</a></li>
+            <li class="nav-item"><a class="nav-link" href="index.html#Portofolio">Portofolio</a></li>
+            <li class="nav-item"><a class="nav-link" href="index.html#pengalaman">Experience</a></li>
+            <li class="nav-item"><a class="nav-link active" href="laporanPraktikum.html">Laporan Praktikum</a></li>
+            <li class="nav-item"><a class="nav-link" href="index.html#contact">Contact</a></li>
+        </ul>
+    </nav>
+
+    <div class="main-content-wrapper">
+        <header>
+            <div>
+                <h1>Praktikum 1: Aplikasi Mobile</h1>
+                <p>Setup Environment, Dart Dasar dan OOP Dart</p>
+                <p>Hanifah Larama Agasi - 2311531002</p>
+            </div>
+        </header>
+
+        <section class="container my-5">
+            <div class="report-detail-content">
+                <!-- === Mulai: ISI ASLI TANPA PERUBAHAN KATA === -->
+                <h2>PRAKTIKUM 1</h2>
+                <p><b>Setup Environment, Dart Dasar dan OOP Dart</b></p>
+
+                <h4>Tujuan</h4>
+                <p>Tujuan praktikum ini yaitu mahasiswa membuat menginstall kebutuhan Praktikum Aplikasi Mobile menggunakan bahasa Dart pada framework Flutter, mahasiswa menguasai dasar-dasar Bahasa pemrograman Dart serta konsep OOP Dart :</p>
+                <ul>
+                    <li>Install SDK Dart dan Integrated Development Editor (IDE)</li>
+                    <li>Membuat program sederhana untuk memahami dasar Bahasa pemrograman dart</li>
+                    <li>Membuat program sederhana menggunakan konsep OOP</li>
+                </ul>
+
+                <h4>Alat</h4>
+                <ul>
+                    <li>Computer / laptop yang telah terinstall SDK Dart, SDK Flutter</li>
+                    <li>IDE (Visual Studio Code / Android Studio)</li>
+                </ul>
+
+                <h4>Langkah-langkah</h4>
+                <p><b>Install SDK Dart</b></p>
+                <p>Sebelum install SDK Dart pastikan arsitektur hardware telah memenuhi persyaratan minimum, Adapun persyaratan minimum yang dibutuhkan untuk install SDK Dart seperti gambar berikut :</p>
+                <div class="row g-4">
+                    <div class="col-md-4">
+                        <div class="card shadow">
+                            <img src="img/appmo1/1.png" class="card-img-top" alt="Project 1" data-bs-toggle="modal" data-bs-target="#imageModal" onclick="showImage(this)" loading="lazy">
+                        </div>
+                    </div>
+                </div>
+
+                <p><b>Menggunakan Chocolatey</b></p>
+                <p>Install Chocolatey → <a href="https://chocolatey.org/install">https://chocolatey.org/install</a></p>
+                <p>Buka command promt atau powershell kemudian ketikan perintah <code>choco install dart-sdk</code></p>
+
+                <p><b>Extract SDK Dart ZIP</b></p>
+                <p>Download SDK Dart pada halaman Dart SDK archive <a href="https://dart.dev/getdart/archive#stable-channel">https://dart.dev/getdart/archive#stable-channel</a></p>
+                <div class="row g-4">
+                    <div class="col-md-4">
+                        <div class="card shadow">
+                            <img src="img/appmo1/2.png" class="card-img-top" alt="Project 1" data-bs-toggle="modal" data-bs-target="#imageModal" onclick="showImage(this)" loading="lazy">
+                        </div>
+                    </div>
+                </div>
+                <p>Download versi stabil sesuai dengan system operasi pada computer. Selanjutnya extract SDK Dart yang telah di zip</p>
+
+                <p><b>Mengatur PATH SDK dart</b></p>
+                <p>Buka Edit the system Environment variable</p>
+                <div class="row g-4">
+                    <div class="col-md-4">
+                        <div class="card shadow">
+                            <img src="img/appmo1/3.png" class="card-img-top" alt="Project 1" data-bs-toggle="modal" data-bs-target="#imageModal" onclick="showImage(this)" loading="lazy">
+                        </div>
+                    </div>
+                </div>
+                <p>Klik Environment Variables maka akan muncul tampilan seperti berikut</p>
+                <div class="row g-4">
+                    <div class="col-md-4">
+                        <div class="card shadow">
+                            <img src="img/appmo1/4.png" class="card-img-top" alt="Project 1" data-bs-toggle="modal" data-bs-target="#imageModal" onclick="showImage(this)" loading="lazy">
+                        </div>
+                    </div>
+                </div>
+                <p>Pilih Path → Edit dan tambahkan Path dari SDK Dart <code>C:\tools\dart sdk\bin</code> atau <code>directory_extract\dart-sdk\bin</code></p>
+                <p>Cek apakah dart sudah terinstall atau belum dengan mengetikkan dart pada command prompt</p>
+                <div class="row g-4">
+                    <div class="col-md-4">
+                        <div class="card shadow">
+                            <img src="img/appmo1/5.png" class="card-img-top" alt="Project 1" data-bs-toggle="modal" data-bs-target="#imageModal" onclick="showImage(this)" loading="lazy">
+                        </div>
+                    </div>
+                </div>
+                <p><b>Install ekstension Dart di VSCode</b></p>
+                <div class="row g-4">
+                    <div class="col-md-4">
+                        <div class="card shadow">
+                            <img src="img/appmo1/6.png" class="card-img-top" alt="Project 1" data-bs-toggle="modal" data-bs-target="#imageModal" onclick="showImage(this)" loading="lazy">
+                        </div>
+                    </div>
+                </div>
+
+                <h4>Projek Pertama Dart</h4>
+                <p>Buka command prompt kemudian pilih directory yang akan digunakan untuk menyimpak proyek dart dan ketikkan <code>dart create halo</code> maka proyek dart pertama dengan nama halo akan terbentuk.</p>
+                <div class="row g-4">
+                    <div class="col-md-4">
+                        <div class="card shadow">
+                            <img src="img/appmo1/7.png" class="card-img-top" alt="Project 1" data-bs-toggle="modal" data-bs-target="#imageModal" onclick="showImage(this)" loading="lazy">
+                        </div>
+                    </div>
+                </div>
+                <p>Untuk menjalankannya masuk ke directory halo dan ketikkan <code>dart run</code></p>
+                <div class="row g-4">
+                    <div class="col-md-4">
+                        <div class="card shadow">
+                            <img src="img/appmo1/8.png" class="card-img-top" alt="Project 1" data-bs-toggle="modal" data-bs-target="#imageModal" onclick="showImage(this)" loading="lazy">
+                        </div>
+                    </div>
+                </div>
+                <p>Dari gambar diatas terlihat secara default proyek halo menampilkan pesan Hello Wordl : 42!</p>
+
+                <h4>Dart x Visual Studio Code</h4>
+                <p>Setelah berhasil membuat proyek pertama Dart dengan nama halo, agar lebih memudahkan dalam mempelajari Bahasa Dart, maka kita perlu membuat proyek dart pada Visual Studio Code, buka Visual Studio Code kemudian buka proyek halo, berikut ini tampilannya pada Visual Studio Code.</p>
+                <div class="row g-4">
+                    <div class="col-md-4">
+                        <div class="card shadow">
+                            <img src="img/appmo1/9.png" class="card-img-top" alt="Project 1" data-bs-toggle="modal" data-bs-target="#imageModal" onclick="showImage(this)" loading="lazy">
+                        </div>
+                    </div>
+                </div>
+                <h4>Dart Dasar</h4>
+                <p><b>List</b></p>
+                <p>List tipe data yang berisi kumpulan data atau dalam bahasa pemrograman lain disebut array, Untuk membuat list yaitu List variabel=[] atau var variabel = [].</p>
+                <p>Buat file baru pada folder bin dengan nama dart_dasar.dart kemudian buat function main</p>
+                <p>Buat List dengan tipe string yang berisi nama-nama buah seperti kode program berikut ini.</p>
+                <pre>List fruits = ['Apel', 'Alpukat', 'Nanas', 'Mangga', 'Pisang'];</pre>
+                <p>Selanjutnya untuk menampilkan list dapat menggunakan perintah <code>print(fruits.toString());</code></p>
+                <p>Manipulasi List, silahkan tambahkan kode programnya menjadi seperti berikut ini.</p>
+                <div class="row g-4">
+                    <div class="col-md-4">
+                        <div class="card shadow">
+                            <img src="img/appmo1/10.png" class="card-img-top" alt="Project 1" data-bs-toggle="modal" data-bs-target="#imageModal" onclick="showImage(this)" loading="lazy">
+                        </div>
+                    </div>
+                </div>
+                <p><b>Output:</b></p>
+                <div class="row g-4">
+                    <div class="col-md-4">
+                        <div class="card shadow">
+                            <img src="img/appmo1/11.png" class="card-img-top" alt="Project 1" data-bs-toggle="modal" data-bs-target="#imageModal" onclick="showImage(this)" loading="lazy">
+                        </div>
+                    </div>
+                </div>
+
+                <p><b>Set</b></p>
+                <p>Set merupakan sebuah tipe data yang mirip dengan list, akan tetapi set tidak memiliki index sehingga data yang ada pada set tidak berurutan, Set tidak menerima duplikasi data Tidak bisa mengakses menggunakan index, Untuk membuat set yaitu Set namaVariabel={}; atau var namaVariabel={}; </p>
+                <p>Tambahkan kode program berikut pada file dart_dasar.dart</p>
+                <div class="row g-4">
+                    <div class="col-md-4">
+                        <div class="card shadow">
+                            <img src="img/appmo1/12.png" class="card-img-top" alt="Project 1" data-bs-toggle="modal" data-bs-target="#imageModal" onclick="showImage(this)" loading="lazy">
+                        </div>
+                    </div>
+                </div>
+                <p><b>Output</b></p>
+                <div class="row g-4">
+                    <div class="col-md-4">
+                        <div class="card shadow">
+                            <img src="img/appmo1/13.png" class="card-img-top" alt="Project 1" data-bs-toggle="modal" data-bs-target="#imageModal" onclick="showImage(this)" loading="lazy">
+                        </div>
+                    </div>
+                </div>
+
+                <p><b>Map</b></p>
+                <p>Map adalah tipe data key-value yang mana key seperti index dan value sebagai datanya. Menggunakan kurung kurawal {} dan menggunakan : untuk memisahkan key-value. Jika ada data key yang sama maka yang akan digunakan data key yang terakhir.</p>
+                <p>Untuk membuat map yaitu:</p>
+                <pre>Map namaVariabel = {};
+var namaVariabel = Map();
+var namaVariabel = {};</pre>
+                <p>Berikut ini kode program contoh penggunaan Map pada Dart.</p>
+                <div class="row g-4">
+                    <div class="col-md-4">
+                        <div class="card shadow">
+                            <img src="img/appmo1/14.png" class="card-img-top" alt="Project 1" data-bs-toggle="modal" data-bs-target="#imageModal" onclick="showImage(this)" loading="lazy">
+                        </div>
+                    </div>
+                </div>
+                <p><b>Output:</b></p>
+                <div class="row g-4">
+                    <div class="col-md-4">
+                        <div class="card shadow">
+                            <img src="img/appmo1/15.png" class="card-img-top" alt="Project 1" data-bs-toggle="modal" data-bs-target="#imageModal" onclick="showImage(this)" loading="lazy">
+                        </div>
+                    </div>
+                </div>
+
+                <p><b>Perulangan</b></p>
+                <p>Cara Pertama :</p>
+                <div class="row g-4">
+                    <div class="col-md-4">
+                        <div class="card shadow">
+                            <img src="img/appmo1/16.png" class="card-img-top" alt="Project 1" data-bs-toggle="modal" data-bs-target="#imageModal" onclick="showImage(this)" loading="lazy">
+                        </div>
+                    </div>
+                </div>
+                <p>Cara kedua:</p>
+                <div class="row g-4">
+                    <div class="col-md-4">
+                        <div class="card shadow">
+                            <img src="img/appmo1/17.png" class="card-img-top" alt="Project 1" data-bs-toggle="modal" data-bs-target="#imageModal" onclick="showImage(this)" loading="lazy">
+                        </div>
+                    </div>
+                </div>
+                <p><b>Output:</b></p>
+                <div class="row g-4">
+                    <div class="col-md-4">
+                        <div class="card shadow">
+                            <img src="img/appmo1/18.png" class="card-img-top" alt="Project 1" data-bs-toggle="modal" data-bs-target="#imageModal" onclick="showImage(this)" loading="lazy">
+                        </div>
+                    </div>
+                </div>
+
+                <h4>OOP</h4>
+                <p>Dart Kode program berikut ini merupakan contoh konsep penerapan OOP pada Bahasa Dart. Buat file baru pada folder bin dengan nama oop.dart dan tambahkan kode program berikut.</p>
+                <div class="row g-4">
+                    <div class="col-md-4">
+                        <div class="card shadow">
+                            <img src="img/appmo1/19.png" class="card-img-top" alt="Project 1" data-bs-toggle="modal" data-bs-target="#imageModal" onclick="showImage(this)" loading="lazy">
+                        </div>
+                    </div>
+                </div>
+                <p><b>Output:</b></p>
+                <div class="row g-4">
+                    <div class="col-md-4">
+                        <div class="card shadow">
+                            <img src="img/appmo1/20.png" class="card-img-top" alt="Project 1" data-bs-toggle="modal" data-bs-target="#imageModal" onclick="showImage(this)" loading="lazy">
+                        </div>
+                    </div>
+                </div>
+                <!-- === Selesai: ISI ASLI TANPA PERUBAHAN KATA === -->
+
+                <!-- === Tambahan dari draft: TANPA MENGUBAH STYLE/FUNGSI, HANYA MENAMBAH === -->
+                <h4>Tugas</h4>
+                <p>Buatlah aplikasi sederhana mini laundry menggunakan Bahasa pemgrograman Dart dengan ketentuan sebagai berikut :</p>
+                <p>Paket Cuci dan Setrika 1 kg 6.000</p>
+                <p>Paket Cuci 1 kg 4.000</p>
+                <p>Paket Setrika 1 kg 3.000</p>
+                <p>Jika total laundry &gt;= 50.000 maka mendapatkan potongan harga 5%, dan jika lebih dari 100.000 mendapatkan potongan 10%</p>
+                <p>Tampilkan output jumlah yang harus dibayar</p>
+                <p>Ubah program diatas menggunakan konsep OOP.</p>
+
+                <h4>Perancangan Algoritma</h4>
+                <p>&nbsp;&nbsp;&nbsp;&nbsp;Input: tiga nilai berat (kg) untuk tiap paket.</p>
+                <p>&nbsp;&nbsp;&nbsp;&nbsp;Hitung subtotal per paket: berat × harga_per_kg.</p>
+                <p>&nbsp;&nbsp;&nbsp;&nbsp;Hitung subtotal keseluruhan: jumlah semua subtotal paket.</p>
+                <p>&nbsp;&nbsp;&nbsp;&nbsp;Terapkan aturan diskon:</p>
+                <p>jika subtotal &gt; 100.000 ⇒ 10%</p>
+                <p>else jika subtotal ≥ 50.000 ⇒ 5%</p>
+                <p>else ⇒ 0%</p>
+                <p>&nbsp;&nbsp;&nbsp;&nbsp;Hitung total: total = subtotal − (subtotal × diskon%).</p>
+                <p>&nbsp;&nbsp;&nbsp;&nbsp;Tampilkan struk: detail paket, subtotal, rule diskon, diskon (Rp), total bayar (Rp).</p>
+
+                <h4>Implementasi (Prosedural)</h4>
+                <p>&nbsp;&nbsp;&nbsp;&nbsp;Seluruh logika berada di fungsi main().</p>
+                <p>&nbsp;&nbsp;&nbsp;&nbsp;Fungsi kecil:</p>
+                <p>readInt(label): membaca input integer dari terminal dengan validasi sederhana.</p>
+                <p>rupiah(n): memformat angka menjadi string rupiah (mis. 150000 → Rp 150.000).</p>
+                <p>&nbsp;&nbsp;&nbsp;&nbsp;Variabel konstan menyimpan harga per kg tiap paket.</p>
+                <p>&nbsp;&nbsp;&nbsp;&nbsp;Alur: baca input → hitung subtotal → tentukan diskonPersen → hitung diskon &amp; total → cetak struk.</p>
+                <p>Kelebihan: sederhana, cepat ditulis.</p>
+                <p>Keterbatasan: struktur kurang modular; sulit dikembangkan (mis. tambah paket/aturan baru).</p>
+
+                <pre>/import 'dart:io';
+
+// Format Rupiah sederhana
+String rupiah(int n) {
+  final s = n.toString();
+  final buf = StringBuffer();
+  int c = 0;
+  for (int i = s.length - 1; i >= 0; i--) {
+    buf.write(s[i]);
+    c++;
+    if (c % 3 == 0 && i != 0) buf.write('.');
+  }
+  return 'Rp ${buf.toString().split('').reversed.join()}';
+}
+
+int readInt(String label) {
+  stdout.write('$label: ');
+  final raw = stdin.readLineSync() ?? '';
+  final v = int.tryParse(raw) ?? 0;
+  return v < 0 ? 0 : v;
+}
+
+void main() {
+  // Harga per kg (Rp)
+  const hargaCuciSetrika = 6000;
+  const hargaCuci = 4000;
+  const hargaSetrika = 3000;
+
+  print('=== MINI LAUNDRY — PROSEDURAL ===');
+  print('Harga per kg:');
+  print('- Paket Cuci & Setrika : ${rupiah(hargaCuciSetrika)} / kg');
+  print('- Paket Cuci            : ${rupiah(hargaCuci)} / kg');
+  print('- Paket Setrika         : ${rupiah(hargaSetrika)} / kg');
+  print('');
+
+  final kgCS = readInt('Masukkan berat Paket Cuci & Setrika (kg)');
+  final kgC = readInt('Masukkan berat Paket Cuci (kg)');
+  final kgS = readInt('Masukkan berat Paket Setrika (kg)');
+  print('');
+
+  final subCS = kgCS * hargaCuciSetrika;
+  final subC = kgC * hargaCuci;
+  final subS = kgS * hargaSetrika;
+  final subtotal = subCS + subC + subS;
+
+  // Aturan diskon otomatis
+  int diskonPersen = 0;
+  String rule = 'Subtotal < 50.000 → 0%';
+  if (subtotal > 100000) {
+    diskonPersen = 10;
+    rule = 'Subtotal > 100.000 → 10%';
+  } else if (subtotal >= 50000) {
+    diskonPersen = 5;
+    rule = 'Subtotal ≥ 50.000 → 5%';
+  }
+
+  final diskon = subtotal * diskonPersen ~/ 100;
+  final total = subtotal - diskon;
+
+  print('=== RINCIAN ===');
+  print('Cuci & Setrika : $kgCS kg x ${rupiah(hargaCuciSetrika)} = ${rupiah(subCS)}');
+  print('Cuci           : $kgC  kg x ${rupiah(hargaCuci)} = ${rupiah(subC)}');
+  print('Setrika        : $kgS  kg x ${rupiah(hargaSetrika)} = ${rupiah(subS)}');
+  print('Subtotal       : ${rupiah(subtotal)}');
+  print('Rule diskon    : $rule');
+  print('Diskon ($diskonPersen%) : -${rupiah(diskon)}');
+  print('--------------------------------');
+  print('Total Bayar    : ${rupiah(total)}');
+}
+</pre>
+
+                <h4>Implementasi (OOP)</h4>
+                <p>&nbsp;&nbsp;&nbsp;&nbsp;Class LaundryPackage: nama paket &amp; harga/kg.</p>
+                <p>&nbsp;&nbsp;&nbsp;&nbsp;Class OrderLine: 1 baris pesanan (paket + kg) + subtotal turunan.</p>
+                <p>&nbsp;&nbsp;&nbsp;&nbsp;Class Order:</p>
+                <p>subtotal: penjumlahan seluruh OrderLine.</p>
+                <p>discountPercent: menerapkan aturan diskon otomatis berdasarkan subtotal.</p>
+                <p>discount, total, dan ruleText: nilai turunan untuk struk.</p>
+                <p>printReceipt(): mencetak struk dengan format rapi.</p>
+                <p>Kelebihan: modular, mudah diekstensikan (mis. voucher, paket baru).</p>
+                <p>Keterbatasan: kode sedikit lebih panjang dibanding prosedural.</p>
+
+                <pre>import 'dart:io';
+
+// Util format rupiah
+String rupiah(int n) {
+  final s = n.toString();
+  final buf = StringBuffer();
+  int c = 0;
+  for (int i = s.length - 1; i >= 0; i--) {
+    buf.write(s[i]);
+    c++;
+    if (c % 3 == 0 && i != 0) buf.write('.');
+  }
+  return 'Rp ${buf.toString().split('').reversed.join()}';
+}
+
+class LaundryPackage {
+  final String name;
+  final int pricePerKg;
+  const LaundryPackage(this.name, this.pricePerKg);
+}
+
+class OrderLine {
+  final LaundryPackage pack;
+  final int kg;
+  const OrderLine(this.pack, this.kg);
+  int get subtotal => kg * pack.pricePerKg;
+}
+
+class Order {
+  final List<OrderLine> lines;
+  Order(this.lines);
+
+  int get subtotal => lines.fold(0, (s, l) => s + l.subtotal);
+
+  int get discountPercent {
+    final s = subtotal;
+    if (s > 100000) return 10;       // > 100.000 → 10%
+    if (s >= 50000) return 5;        // ≥ 50.000  → 5%
+    return 0;
+  }
+
+  String get ruleText {
+    final s = subtotal;
+    if (s > 100000) return 'Subtotal > 100.000 → 10%';
+    if (s >= 50000) return 'Subtotal ≥ 50.000 → 5%';
+    return 'Subtotal < 50.000 → 0%';
+  }
+
+  int get discount => subtotal * discountPercent ~/ 100;
+  int get total => subtotal - discount;
+
+  void printReceipt() {
+    print('=== RINCIAN PESANAN ===');
+    for (final l in lines) {
+      if (l.kg <= 0) continue;
+      final nm = l.pack.name.length >= 16 ? l.pack.name : l.pack.name.padRight(16);
+      print('$nm : ${l.kg} kg x ${rupiah(l.pack.pricePerKg)} = ${rupiah(l.subtotal)}');
+    }
+    print('Subtotal       : ${rupiah(subtotal)}');
+    print('Rule diskon    : $ruleText');
+    print('Diskon (${discountPercent}%) : -${rupiah(discount)}');
+    print('--------------------------------');
+    print('Total Bayar    : ${rupiah(total)}');
+  }
+}
+
+int readInt(String label) {
+  stdout.write('$label: ');
+  final raw = stdin.readLineSync() ?? '';
+  final v = int.tryParse(raw) ?? 0;
+  return v < 0 ? 0 : v;
+}
+
+void main() {
+  const pCS = LaundryPackage('Cuci & Setrika', 6000);
+  const pC  = LaundryPackage('Cuci',           4000);
+  const pS  = LaundryPackage('Setrika',        3000);
+
+  print('=== MINI LAUNDRY — OOP ===');
+  print('Harga per kg:');
+  print('- ${pCS.name} : ${rupiah(pCS.pricePerKg)} / kg');
+  print('- ${pC.name.padRight(15)}: ${rupiah(pC.pricePerKg)} / kg');
+  print('- ${pS.name.padRight(15)}: ${rupiah(pS.pricePerKg)} / kg');
+  print('');
+
+  final kgCS = readInt('Masukkan berat ${pCS.name} (kg)');
+  final kgC  = readInt('Masukkan berat ${pC.name} (kg)');
+  final kgS  = readInt('Masukkan berat ${pS.name} (kg)');
+  print('');
+
+  final order = Order([
+    OrderLine(pCS, kgCS),
+    OrderLine(pC,  kgC),
+    OrderLine(pS,  kgS),
+  ]);
+
+  order.printReceipt();
+}
+</pre>
+
+                <h4>Uji Coba &amp; Perhitungan Contoh</h4>
+                <p>&nbsp;&nbsp;&nbsp;&nbsp;Tanpa diskon</p>
+                <p>Input: Cuci Setrika = 0 kg, Cuci = 0 kg, Setrika = 5 kg</p>
+                <p>Subtotal: 5 × 3.000 = Rp 15.000 → diskon 0%</p>
+                <p>Total: Rp 15.000</p>
+                <div class="row g-4">
+                    <div class="col-md-4">
+                        <div class="card shadow">
+                            <img src="img/appmo1/21.png" class="card-img-top" alt="Project 1" data-bs-toggle="modal" data-bs-target="#imageModal" onclick="showImage(this)" loading="lazy">
+                        </div>
+                    </div>
+                </div>
+                <p><br>OOP:</p>
+                <div class="row g-4">
+                    <div class="col-md-4">
+                        <div class="card shadow">
+                            <img src="img/appmo1/22.png" class="card-img-top" alt="Project 1" data-bs-toggle="modal" data-bs-target="#imageModal" onclick="showImage(this)" loading="lazy">
+                        </div>
+                    </div>
+                </div>
+                <p><br></p>
+                <p>&nbsp;&nbsp;&nbsp;&nbsp;Diskon 5% (≥ Rp50.000)</p>
+                <p>Input: Cuci Setrika = 8 kg, Cuci = 0, Setrika = 1</p>
+                <p>Subtotal: (8 × 6.000) + (1 × 3.000) = Rp 51.000 → diskon 5% = Rp 2.550</p>
+                <p>Total: Rp 51.000 − Rp 2.550 = Rp 48.450</p>
+                <div class="row g-4">
+                    <div class="col-md-4">
+                        <div class="card shadow">
+                            <img src="img/appmo1/23.png" class="card-img-top" alt="Project 1" data-bs-toggle="modal" data-bs-target="#imageModal" onclick="showImage(this)" loading="lazy">
+                        </div>
+                    </div>
+                </div>
+                <p><br>OOP:</p>
+                <div class="row g-4">
+                    <div class="col-md-4">
+                        <div class="card shadow">
+                            <img src="img/appmo1/24.png" class="card-img-top" alt="Project 1" data-bs-toggle="modal" data-bs-target="#imageModal" onclick="showImage(this)" loading="lazy">
+                        </div>
+                    </div>
+                </div>
+                <p><br></p>
+                <p>&nbsp;&nbsp;&nbsp;&nbsp;Diskon 10% (&gt; Rp100.000)</p>
+                <p>Input: Cuci Setrika = 8 kg, Cuci = 11, Setrika = 3</p>
+                <p>Subtotal: (8 × 6.000) + (11 × 4.000) + (4 × 3.000) = Rp 101.000 → diskon 10% = Rp 10.100</p>
+                <p>Total: Rp 101.000 − Rp 10.100 = Rp 90.900</p>
+                <div class="row g-4">
+                    <div class="col-md-4">
+                        <div class="card shadow">
+                            <img src="img/appmo1/25.png" class="card-img-top" alt="Project 1" data-bs-toggle="modal" data-bs-target="#imageModal" onclick="showImage(this)" loading="lazy">
+                        </div>
+                    </div>
+                </div>
+                <p><br>OOP:</p>
+                <div class="row g-4">
+                    <div class="col-md-4">
+                        <div class="card shadow">
+                            <img src="img/appmo1/26.png" class="card-img-top" alt="Project 1" data-bs-toggle="modal" data-bs-target="#imageModal" onclick="showImage(this)" loading="lazy">
+                        </div>
+                    </div>
+                </div>
+                <p><br></p>
+
+                <h4>Kesimpulan</h4>
+                <p>Aplikasi mini-laundry berhasil memenuhi spesifikasi: tiga paket layanan, aturan diskon bertingkat yang otomatis, serta output total bayar yang akurat. Versi prosedural cocok untuk kebutuhan cepat &amp; sederhana, sementara versi OOP lebih siap untuk skala lebih besar dan perubahan aturan di masa depan.</p>
+                <!-- === Akhir Tambahan === -->
+
+                <p class="mt-4"><a href="laporanPraktikum.html">Kembali ke Daftar Laporan</a></p>
+            </div>
+        </section>
+
+        <footer>
+            <p>&copy; 2024 Lara. Built with love and Bootstrap 5.</p>
+        </footer>
+    </div>
+
+    <!-- Modal Gambar -->
+    <div class="modal fade" id="imageModal" tabindex="-1" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered modal-xl">
+        <div class="modal-content bg-transparent border-0">
+          <img id="modalImage" class="img-fluid rounded" alt="Preview">
+        </div>
+      </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+      // Fungsi untuk menampilkan gambar ke modal (dipanggil dari onclick pada <img>)
+      function showImage(imgEl) {
+        const modalImg = document.getElementById('modalImage');
+        modalImg.src = imgEl.src;
+        modalImg.alt = imgEl.alt || 'Preview';
+      }
+    </script>
+</body>
+</html>

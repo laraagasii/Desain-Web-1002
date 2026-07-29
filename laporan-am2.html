@@ -1,0 +1,747 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Laporan Praktikum 2 - Aplikasi Mobile</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        :root {
+            --copper-gold: #B99470;
+            --olive-green: #A9B388;
+            --ivory: #FEFAE0;
+            --light-gray: #D3D3D3;
+            --text-dark: #2e2e2e;
+            --text-light: #ffffff;
+        }
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--ivory);
+            color: var(--text-dark);
+            scroll-behavior: smooth;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            overflow-x: hidden;
+        }
+        .main-content-wrapper {
+            margin-left: 250px;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 250px;
+            height: 100vh;
+            background-color: var(--light-gray);
+            color: var(--text-dark);
+            padding: 20px 0;
+            box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+        }
+        nav .navbar-brand {
+            text-align: center;
+            display: block;
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin-bottom: 30px;
+            color: var(--text-dark);
+        }
+        nav .nav-link {
+            color: var(--text-dark);
+            font-weight: 500;
+            display: block;
+            margin: 10px 0;
+            padding: 10px 20px;
+            border-radius: 5px;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+        nav .nav-link:hover {
+            background-color: var(--olive-green);
+            color: var(--text-light);
+        }
+        nav .nav-link.active {
+            background-color: var(--olive-green);
+            color: var(--text-light);
+        }
+        header {
+            background-color: var(--copper-gold);
+            color: var(--text-light);
+            padding: 50px 50px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            text-align: center;
+            flex-shrink: 0;
+        }
+        header h1 {
+            font-size: 4rem;
+            font-weight: 600;
+        }
+        header p {
+            font-size: 1.2rem;
+            font-weight: 300;
+        }
+        section {
+            padding: 60px 50px;
+            flex-grow: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            text-align: left;
+        }
+        .report-detail-content {
+            background-color: var(--light-gray);
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+            width: 100%;
+            max-width: 900px;
+            line-height: 1.8;
+        }
+        .report-detail-content h2 {
+            color: var(--copper-gold);
+            margin-bottom: 25px;
+            text-align: center;
+        }
+        .report-detail-content h4 {
+            color: var(--olive-green);
+            margin-top: 30px;
+            margin-bottom: 15px;
+        }
+        .report-detail-content p, .report-detail-content ul, .report-detail-content ol {
+            margin-bottom: 15px;
+        }
+        .report-detail-content pre {
+            background-color: var(--text-dark);
+            color: var(--text-light);
+            padding: 15px;
+            border-radius: 5px;
+            overflow-x: auto;
+            margin-bottom: 20px;
+        }
+        .report-detail-content img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 5px;
+            margin-top: 15px;
+        }
+        footer {
+            background-color: var(--copper-gold);
+            color: var(--text-light);
+            padding: 20px 50px;
+            text-align: center;
+            width: 100%;
+            flex-shrink: 0;
+        }
+
+        /* ====== OVERRIDE kecil agar gambar grid tampil lebar (full kontainer) ====== */
+        .report-detail-content .row.g-4 > .col-md-4 {
+            flex: 0 0 100%;
+            max-width: 100%;
+        }
+
+        @media (max-width: 768px) {
+            .main-content-wrapper { margin-left: 0; }
+            body { display: block; }
+            nav {
+                position: static;
+                width: 100%;
+                height: auto;
+                box-shadow: none;
+                padding: 10px 0;
+            }
+            nav .navbar-brand { margin-bottom: 15px; }
+            nav .nav-link { text-align: center; padding: 8px 15px; }
+            header, section, footer { padding: 30px 20px; margin-left: 0; }
+            header h1 { font-size: 2.5rem; }
+            header p { font-size: 1rem; }
+            .report-detail-content { padding: 20px; }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <a class="navbar-brand" href="index.html">Lara's Page</a>
+        <ul class="nav flex-column">
+            <li class="nav-item"><a class="nav-link" href="index.html#about">About</a></li>
+            <li class="nav-item"><a class="nav-link" href="index.html#skills">Skills</a></li>
+            <li class="nav-item"><a class="nav-link" href="index.html#passion">Passion</a></li>
+            <li class="nav-item"><a class="nav-link" href="index.html#Portofolio">Portofolio</a></li>
+            <li class="nav-item"><a class="nav-link" href="index.html#pengalaman">Experience</a></li>
+            <li class="nav-item"><a class="nav-link active" href="laporanPraktikum.html">Laporan Praktikum</a></li>
+            <li class="nav-item"><a class="nav-link" href="index.html#contact">Contact</a></li>
+        </ul>
+    </nav>
+
+    <div class="main-content-wrapper">
+        <header>
+            <div>
+                <h1>Praktikum 2: Flutter Development</h1>
+                <p>Setup Flutter Development, Stateless & Stateful Widgets, Basic Widgets</p>
+            </div>
+        </header>
+
+        <section class="container my-5">
+            <div class="report-detail-content">
+                <h2>PRAKTIKUM 2</h2>
+                <p class="text-center"><b>Setup Flutter Development, Stateless & Stateful Widget, Basic Widgets</b></p>
+
+                <h4>1.1 Tujuan</h4>
+                <p>Tujuan praktikum ini yaitu mahasiswa mampu menginstall lingkungan flutter development, stateless dan statefull widget dan basic widgets flutter:</p>
+                <ul>
+                    <li>Mahasiswa mampu menyiapkan lingkungan development flutter seperti install sdk flutter, git, android SDK, IDE dll.</li>
+                    <li>Mahasiswa mampu membuat stateless dan statefull widget flutter.</li>
+                    <li>Mahasiswa mampu membuat contoh basic widgets flutter.</li>
+                </ul>
+
+                <h4>1.2 Alat</h4>
+                <ul>
+                    <li>Computer/laptop yang telah terinstall flutter development.</li>
+                </ul>
+                
+                <h4>1.3 Teori</h4>
+                <p><i>Tidak ada teori pada bagian ini.</i></p>
+
+                <h4>1.4 Langkah-langkah</h4>
+
+                <h5>Setup Lingkungan Flutter Development (Windows)</h5>
+                
+                <h6>Install GIT</h6>
+                <p>Langkah pertama adalah menginstall GIT.</p>
+
+                <h6>Install Visual Studio</h6>
+                <p>Ada library flutter yang membutuhkan Bahasa C++ maka perlu diinstall Visual Studio. Install Visual Studio kemudian centang pada <b>Desktop development with C++</b>.</p>
+                <div class="img-placeholder" alt="Visual Studio Installer Workloads"></div>
+
+                <h6>Install Android Studio</h6>
+                <p>Meskipun kita dapat membuat aplikasi flutter tanpa menggunakan Android Studio, akan tetapi sangat direkomendasikan untuk menginstallnya, karena pada Android Studio terdapat Android SDK Manager dan kita dapat membuat emulator untuk menjalankan aplikasi flutter.</p>
+                <p>Setelah selesai diinstall, buat project baru kemudian cari menu <b>SDK Manager</b>.</p>
+                <p>Pilih tab <b>SDK Tools</b> kemudian ceklis item-item seperti pada gambar berikut, lalu tunggu sampai proses download selesai.</p>
+                <div class="img-placeholder" alt="Android Studio SDK Manager - SDK Tools"></div>
+
+                <h6>Install Visual Studio Code</h6>
+                <p>Install Visual Studio Code, lalu tambahkan ekstensi Flutter.</p>
+                <div class="img-placeholder" alt="Ekstensi Flutter di VS Code"></div>
+
+                <h6>Install SDK Flutter</h6>
+                <p>Download SDK Flutter versi stable, kemudian extract pada komputer Anda (misalkan pada direktori <code>C:\Users\{username}\dev</code>). Selanjutnya tambahkan path flutter ke environment variables.</p>
+                <div class="img-placeholder" alt="System Properties - Environment Variables"></div>
+                <p>Edit path dan tambahkan direktori hasil extract ke dalam path. Misalkan direktori extract adalah <code>C:\Users\{username}\dev</code>, maka tambahkan <code>\bin</code> di ujungnya menjadi <code>C:\Users\{username}\dev\flutter\bin</code>.</p>
+                <div class="img-placeholder" alt="Edit Environment Variable - Path"></div>
+
+                <h6>Cek Setup Flutter Development</h6>
+                <p>Setelah mengikuti langkah-langkah di atas, selanjutnya kita pastikan apakah lingkungan flutter development siap untuk digunakan. Buka Command Prompt / PowerShell / Terminal kemudian ketikkan <code>flutter doctor</code>.</p>
+                <pre><code>C:\Users\NURFIAH>flutter doctor
+Doctor summary (to see all details, run flutter doctor -v):
+[✔] Flutter (Channel stable, 3.22.0, on Microsoft Windows [Version 10.0.19045.6332], locale en-ID)
+[✔] Windows Version (Installed version of Windows is version 10 or higher)
+[✔] Android toolchain - develop for Android devices (Android SDK version 34.0.0)
+[!] Some Android licenses not accepted. To resolve this, run: flutter doctor --android-licenses
+[✔] Chrome - develop for the web
+[✔] Visual Studio - develop for Windows apps (Visual Studio Community 2022 17.14.3)
+[✔] Android Studio (version 2023.3)
+[✔] VS Code (version 1.104.0)
+[✔] Connected device (3 available)
+[✔] Network resources
+
+! Doctor found issues in 1 category.</code></pre>
+                <p>Jika tidak ada tanda silang (error), maka kita siap untuk praktek membuat aplikasi menggunakan flutter.</p>
+
+                <h5>Project Pertama Flutter "hai"</h5>
+                <p>Membuat project flutter dapat dilakukan menggunakan beberapa cara yaitu dapat melalui Command Prompt / Terminal dan juga dapat dibuat langsung dari IDE yang kita gunakan.</p>
+                <h6>Via Terminal/Command Prompt</h6>
+                <p>Buka terminal / command prompt kemudian ketikkan <code>flutter create hai</code>.</p>
+                <pre><code>C:\Users\NURFIAH>flutter create hai
+Creating project hai...
+Resolving dependencies in hai... (1.8s)
+...
+All done!</code></pre>
+                <p>Masuk ke direktori <code>cd hai</code> dan ketikkan <code>flutter run</code> untuk menjalankan project. Akan muncul pilihan di mana project akan dijalankan (misalnya Windows, Chrome, atau Edge).</p>
+                <div class="img-placeholder" alt="Tampilan Default Project Flutter"></div>
+
+                <h6>Via Visual Studio Code</h6>
+                <ol>
+                    <li>Buka Visual Studio Code.</li>
+                    <li>Buka Command Palette (Ctrl+Shift+P).</li>
+                    <li>Ketik <b>Flutter: New Project</b>.</li>
+                    <li>Pilih jenis proyek "Application".</li>
+                    <li>Pilih direktori dan masukkan nama proyek "hai".</li>
+                </ol>
+
+                <h5>Struktur Project Flutter</h5>
+                <div class="img-placeholder" alt="Struktur Direktori Proyek Flutter"></div>
+                <ul>
+                    <li><b>lib/</b>: Berfungsi untuk menyimpan seluruh kode Dart. <code>main.dart</code> adalah class utama yang pertama kali akan dieksekusi.</li>
+                    <li><b>android/</b>: Berisi konfigurasi untuk aplikasi Android pada file <code>build.gradle</code>.</li>
+                    <li><b>ios/</b>: Berisi konfigurasi untuk aplikasi iOS pada file <code>Info.plist</code>.</li>
+                    <li><b>assets/</b>: Direktori dibuat manual untuk menyimpan aset aplikasi seperti gambar, font, dll.</li>
+                    <li><b>test/</b>: Digunakan untuk menyimpan kode testing.</li>
+                    <li><b>pubspec.yaml</b>: Berfungsi sebagai file utama konfigurasi proyek Flutter.</li>
+                    <li><b>README.md</b>: Berisi deskripsi proyek (penjelasan aplikasi, cara install dll).</li>
+                    <li><b>.gitignore</b>: Digunakan untuk pengaturan GIT.</li>
+                </ul>
+
+                <h4>Stateless dan Statefull Widget</h4>
+                
+                <h5>Stateless Widget</h5>
+                <p>Stateless Widget merupakan widget yang data atau tampilannya tidak mengalami perubahan ketika sebuah state dijalankan. Widget ini bersifat statis atau tetap, misalnya teks statis, logo aplikasi, dll.</p>
+                <pre><code>import 'package:flutter/material.dart';
+
+void main() {
+  runApp(const MyStateless());
+}
+
+class MyStateless extends StatelessWidget {
+  const MyStateless({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      home: Scaffold(
+        appBar: AppBar(
+          title: const Text("Stateless Widget"),
+        ),
+        body: const Center(
+          child: Text("ini body"),
+        ),
+      ),
+    );
+  }
+}</code></pre>
+                <h6>Output:</h6>
+                <div class="img-placeholder" alt="Output Stateless Widget"></div>
+
+                <h5>Statefull Widget</h5>
+                <p>Statefull Widget merupakan widget dinamis yang ketika sebuah state berubah maka tampilan UI juga berubah. Contohnya ketika tombol diklik atau ditekan maka tombol berubah warna, atau form input nilainya berubah.</p>
+                <pre><code>import 'package:flutter/material.dart';
+
+void main() {
+  runApp(const MyStatefull());
+}
+
+class MyStatefull extends StatefulWidget {
+  const MyStatefull({super.key});
+
+  @override
+  State<MyStatefull> createState() => _MyStatefullState();
+}
+
+class _MyStatefullState extends State<MyStatefull> {
+  int _kelipatan = 0;
+
+  void _kelipatanDua() {
+    setState(() {
+      _kelipatan += 2;
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      home: Scaffold(
+        appBar: AppBar(
+          title: const Text("Statefull Widget"),
+        ),
+        body: Center(
+          child: Container(
+            width: 100,
+            height: 100,
+            color: Colors.amber,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                const Text("Kelipatan 2:"),
+                Text(
+                  '$_kelipatan',
+                  style: Theme.of(context).textTheme.headlineMedium,
+                )
+              ],
+            ),
+          ),
+        ),
+        floatingActionButton: FloatingActionButton(
+          onPressed: _kelipatanDua,
+          tooltip: "Kelipatan 2",
+          child: const Icon(Icons.add),
+        ),
+      ),
+    );
+  }
+}</code></pre>
+                <h6>Output:</h6>
+                <div class="img-placeholder" alt="Output Statefull Widget"></div>
+
+                <h4>Basic Widget</h4>
+
+                <h5>Text</h5>
+                <p>Text merupakan widget dasar yang digunakan untuk menampilkan teks pada layar.</p>
+                <p><b>Properti:</b></p>
+                <ul>
+                    <li><b>data</b>: Berisi teks yang akan ditampilkan.</li>
+                    <li><b>style</b>: Menerima objek <code>TextStyle</code> untuk mengontrol tampilan teks seperti <code>fontSize</code>, <code>color</code>, <code>fontWeight</code>, dll.</li>
+                    <li><b>textAlign</b>: Mengatur perataan teks secara horizontal.</li>
+                    <li><b>maxLines</b>: Membatasi jumlah baris yang akan ditampilkan.</li>
+                    <li><b>overflow</b>: Mengatur teks yang terlalu panjang (misal: <code>TextOverflow.ellipsis</code>).</li>
+                </ul>
+                <pre><code>return Text(
+  "Hai, I am Text Widget",
+  style: TextStyle(
+    fontSize: 14.0,
+    color: Colors.red,
+    fontWeight: FontWeight.bold,
+    fontStyle: FontStyle.italic
+  ),
+  textAlign: TextAlign.center,
+);</code></pre>
+                <h6>Output:</h6>
+                <div class="img-placeholder" alt="Output Text Widget"></div>
+                
+                <h5>Container</h5>
+                <p>Container merupakan widget yang berfungsi sebagai KOTAK yang dapat menampung satu widget child dan menyediakan berbagai properti untuk dekorasi, mengatur posisi dan ukuran.</p>
+                 <p><b>Properti:</b></p>
+                <ul>
+                    <li><b>child</b>: Menerima satu widget yang akan ditempatkan di dalam container.</li>
+                    <li><b>color</b>: Mengatur warna background.</li>
+                    <li><b>width & height</b>: Mengatur lebar dan tinggi container.</li>
+                    <li><b>padding</b>: Mengatur jarak antara konten dengan bagian dalam container.</li>
+                    <li><b>margin</b>: Mengatur jarak antara container dengan widget lain di luarnya.</li>
+                    <li><b>decoration</b>: Menerima objek <code>BoxDecoration</code> untuk mengatur warna, border, corner radius, dan shadow.</li>
+                </ul>
+                <pre><code>return Container(
+  width: 200,
+  height: 200,
+  margin: const EdgeInsets.all(20),
+  padding: const EdgeInsets.all(20),
+  decoration: BoxDecoration(
+    color: Colors.blueAccent,
+    border: Border.all(color: Colors.white, width: 2),
+    borderRadius: BorderRadius.circular(10)
+  ),
+  child: Text("Ini di dalam container"),
+);</code></pre>
+                <h6>Output:</h6>
+                <div class="img-placeholder" alt="Output Container Widget"></div>
+                
+                <h5>Elevated Button</h5>
+                <p>ElevatedButton merupakan widget yang mewakili tombol dan memiliki shadow.</p>
+                <p><b>Properti:</b></p>
+                 <ul>
+                    <li><b>onPressed</b>: Menerima sebuah fungsi/callback ketika tombol ditekan.</li>
+                    <li><b>child</b>: Berisi satu widget yang akan ditampilkan di dalam tombol (biasanya Text atau Icon).</li>
+                    <li><b>style</b>: Menerima objek <code>ButtonStyle</code> untuk menyesuaikan tampilan tombol.</li>
+                 </ul>
+                <pre><code>return ElevatedButton(
+  onPressed: () {
+    print("tombol ditekan");
+  },
+  style: ElevatedButton.styleFrom(
+    backgroundColor: Colors.green,
+    foregroundColor: Colors.white,
+    padding: const EdgeInsets.all(20),
+    shape: RoundedRectangleBorder(
+      borderRadius: BorderRadius.circular(16)
+    )
+  ),
+  child: const Text("Elevated Button"),
+);</code></pre>
+                <h6>Output:</h6>
+                <div class="img-placeholder" alt="Output ElevatedButton Widget"></div>
+
+                <h5>Icon</h5>
+                <p>Icon merupakan widget yang digunakan untuk menampilkan ikon, seperti Material Icons dari Google atau Cupertino Icons dari Apple.</p>
+                 <p><b>Properti:</b></p>
+                 <ul>
+                    <li><b>icon</b>: Menerima objek <code>IconData</code> dari kelas <code>Icons</code> atau <code>CupertinoIcons</code>.</li>
+                    <li><b>color</b>: Mengatur warna ikon.</li>
+                    <li><b>size</b>: Mengatur ukuran ikon dalam piksel.</li>
+                 </ul>
+                <pre><code>// Material Icon (Google)
+Icon(
+  Icons.add,
+  color: Colors.amber,
+  size: 50.0,
+),
+// Cupertino Icon (Apple)
+Icon(
+  CupertinoIcons.add,
+  color: Colors.red,
+  size: 50.0,
+),</code></pre>
+                <h6>Output:</h6>
+                <div class="img-placeholder" alt="Output Icon Widget"></div>
+                
+                <h5>Image</h5>
+                <p>Image merupakan widget dasar yang digunakan untuk menampilkan gambar dari berbagai sumber seperti asset, network, memory, dan file system.</p>
+                <h6>Network Image</h6>
+                <pre><code>Image.network(
+  "https://upload.wikimedia.org/wikipedia/commons/thumb/0/01/Logo_Unand.svg/600px-Logo_Unand.svg.png",
+  width: 100,
+  height: 150,
+),</code></pre>
+                <h6>Asset Image</h6>
+                <p>Untuk menggunakan gambar dari asset, pertama buat folder <code>assets/images</code> di dalam proyek. Masukkan gambar ke folder tersebut, lalu daftarkan di file <code>pubspec.yaml</code>:</p>
+                <pre><code>flutter:
+  uses-material-design: true
+  assets:
+    - assets/images/</code></pre>
+                <p>Kemudian gunakan kode berikut:</p>
+                <pre><code>Image.asset(
+  'assets/images/logo.png',
+  width: 100,
+  height: 150,
+),</code></pre>
+                <h6>Output:</h6>
+                <div class="img-placeholder" alt="Output Image Widget"></div>
+
+                <h5>CircleAvatar</h5>
+                <p>CircleAvatar adalah widget yang sering digunakan untuk menampilkan gambar profil pengguna atau inisialnya dalam bentuk lingkaran.</p>
+                <p><b>Properti:</b></p>
+                <ul>
+                    <li><b>child</b>: Widget yang akan ditampilkan di dalam lingkaran (seperti Text atau Icon).</li>
+                    <li><b>backgroundImage</b>: Digunakan untuk menampilkan gambar dari <code>ImageProvider</code>.</li>
+                    <li><b>radius</b>: Mengontrol ukuran lingkaran.</li>
+                    <li><b>backgroundColor</b>: Mengatur warna latar belakang.</li>
+                </ul>
+                <pre><code>Row(
+  mainAxisAlignment: MainAxisAlignment.center,
+  children: [
+    CircleAvatar(
+      radius: 30,
+      backgroundColor: Colors.green,
+      child: Text(
+        "IF",
+        style: TextStyle(fontSize: 20, color: Colors.white),
+      ),
+    ),
+    SizedBox(width: 10),
+    CircleAvatar(
+      radius: 30,
+      backgroundColor: Colors.blue,
+      child: Icon(
+        Icons.person,
+        color: Colors.white,
+        size: 30,
+      ),
+    ),
+  ],
+)</code></pre>
+                <h6>Output:</h6>
+                <div class="img-placeholder" alt="Output CircleAvatar Widget"></div>
+                
+                <h4>1.5 Latihan/Tugas</h4><h5>Tugas 1: Tampilan Widget Vertikal dan Horizontal</h5>
+        <p>Tugas ini meminta pembuatan tampilan yang menggabungkan penataan widget secara vertikal dan horizontal.Solusi di bawah ini menggunakan widget <code>Column</code> sebagai penata utama (vertikal). Di dalamnya, disisipkan widget <code>Row</code> untuk menata beberapa widget lain secara berdampingan (horizontal).Tampilan ini menggunakan lebih dari 3 basic widget, yaitu <code>Container</code>, <code>Text</code>, <code>Icon</code>, dan <code>ElevatedButton</code>.</p>
+        
+        <h6>Kode Program Lengkap:</h6>
+        <pre><code>import 'package:flutter/material.dart';
+
+void main() {
+  runApp(const MyApp());
+}
+
+class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      home: Scaffold(
+        appBar: AppBar(
+          title: const Text('Tugas 1: Layout Vertikal & Horizontal'),
+        ),
+        body: Center(
+          child: Column(
+            // Penataan Vertikal
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: &lt;Widget&gt;[
+              // Widget 1
+              Container(
+                color: Colors.blue,
+                padding: const EdgeInsets.all(12.0),
+                child: const Text(
+                  'Ini widget pertama (Vertikal)',
+                  style: TextStyle(color: Colors.white),
+                ),
+              ),
+              const SizedBox(height: 20),
+
+              // Penataan Horizontal di dalam Column
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: &lt;Widget&gt;[
+                  // Widget 2
+                  const Icon(Icons.star, color: Colors.amber),
+                  const SizedBox(width: 10),
+                  
+                  // Widget 3
+                  const Text('Rating Produk'),
+                  const SizedBox(width: 10),
+
+                  // Widget 4
+                  ElevatedButton(
+                    onPressed: () {},
+                    child: const Text('Beli'),
+                  )
+                ],
+              ),
+              const SizedBox(height: 20),
+
+              // Widget 5
+               Container(
+                color: Colors.green,
+                padding: const EdgeInsets.all(12.0),
+                child: const Text(
+                  'Ini widget terakhir (Vertikal)',
+                  style: TextStyle(color: Colors.white),
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
+</code></pre><hr>
+
+        <h5>Tugas 2: Tampilan Informasi Profil</h5>
+        <p>Tugas ini adalah membuat halaman profil yang mengimplementasikan semua *basic widget* yang dibahas di modul 2, yaitu <code>Text</code>, <code>Container</code>, <code>ElevatedButton</code>, <code>Icon</code>, <code>Image</code>, dan <code>CircleAvatar</code>.</p>
+        <p>Solusi di bawah ini menggunakan <code>Container</code> sebagai kartu profil, <code>CircleAvatar</code> untuk foto, <code>Text</code> untuk informasi, <code>Icon</code> untuk detail kontak, dan <code>ElevatedButton</code> sebagai tombol aksi. Untuk mengimplementasikan widget <code>Image</code>, kita bisa menggunakannya sebagai latar belakang pada <code>CircleAvatar</code> dengan `backgroundImage: AssetImage('path/to/your/image.png')`.</p>
+
+        <h6>Kode Program Lengkap:</h6>
+        <p><strong>Catatan:</strong> Untuk menggunakan `AssetImage`, pastikan Anda sudah membuat folder `assets` di proyek Anda, memasukkan gambar ke dalamnya, dan mendaftarkannya di file `pubspec.yaml`.</p>
+        <pre><code>import 'package:flutter/material.dart';
+
+void main() {
+  runApp(const MyApp());
+}
+
+class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      home: Scaffold(
+        appBar: AppBar(
+          title: const Text('Tugas 2: Kartu Profil'),
+        ),
+        backgroundColor: Colors.grey[200],
+        body: const Center(
+          child: ProfileCard(),
+        ),
+      ),
+    );
+  }
+}
+
+class ProfileCard extends StatelessWidget {
+  const ProfileCard({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    // 1. Menggunakan CONTAINER sebagai kartu utama
+    return Container(
+      width: 300,
+      padding: const EdgeInsets.all(20.0),
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(15.0),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withOpacity(0.1),
+            blurRadius: 10,
+            offset: const Offset(0, 5),
+          ),
+        ],
+      ),
+      child: Column(
+        mainAxisSize: MainAxisSize.min, // Agar container menyesuaikan ukuran konten
+        children: &lt;Widget&gt;[
+          // 2. Menggunakan CIRCLEAVATAR untuk foto profil
+          // 3. Widget IMAGE digunakan di sini melalui backgroundImage
+          const CircleAvatar(
+            radius: 50,
+            // Uncomment baris di bawah dan ganti dengan path gambar Anda
+            // setelah mendaftarkan folder assets di pubspec.yaml
+            // backgroundImage: AssetImage('assets/profil.jpg'), 
+            
+            // Fallback jika tidak ada gambar, menggunakan Icon
+            child: Icon(Icons.person, size: 60, color: Colors.grey),
+          ),
+          const SizedBox(height: 16),
+
+          // 4. Menggunakan TEXT untuk menampilkan informasi
+          const Text(
+            'Lara',
+            style: TextStyle(
+              fontSize: 24,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+          const Text('NIM: 0123456789'),
+          const SizedBox(height: 20),
+
+          // Menggunakan ROW dan ICON untuk detail
+          const ListTile(
+            leading: Icon(Icons.location_on_outlined, color: Colors.blue),
+            title: Text('Padang, Sumatera Barat'),
+          ),
+          const ListTile(
+            leading: Icon(Icons.phone_outlined, color: Colors.green),
+            title: Text('+62 812 3456 7890'),
+          ),
+          const ListTile(
+            leading: Icon(Icons.school_outlined, color: Colors.purple),
+            title: Text('Sistem Informasi'),
+          ),
+          const SizedBox(height: 24),
+
+          // 5. Menggunakan ELEVATEDBUTTON untuk tombol aksi
+          ElevatedButton(
+            onPressed: () {},
+            child: const Text('Hubungi Saya'),
+          ),
+        ],
+      ),
+    );
+  }
+}
+</code></pre>
+
+                 <p class="mt-4"><a href="laporanPraktikum.html">Kembali ke Daftar Laporan</a></p>
+                </div>
+            </section>
+
+            <footer>
+                <p>&copy; 2024 Lara. Built with love and Bootstrap 5.</p>
+            </footer>
+        </div>
+
+        <!-- Modal Gambar -->
+        <div class="modal fade" id="imageModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-xl">
+            <div class="modal-content bg-transparent border-0">
+            <img id="modalImage" class="img-fluid rounded" alt="Preview">
+            </div>
+        </div>
+        </div>
+
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+        <script>
+        // Fungsi untuk menampilkan gambar ke modal (dipanggil dari onclick pada <img>)
+        function showImage(imgEl) {
+            const modalImg = document.getElementById('modalImage');
+            modalImg.src = imgEl.src;
+            modalImg.alt = imgEl.alt || 'Preview';
+        }
+        </script>
+    </body>
+    </html>

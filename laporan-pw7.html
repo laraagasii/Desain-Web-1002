@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Laporan Praktikum 7 - Pemrograman Web</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        :root {
+            --copper-gold: #B99470;
+            --olive-green: #A9B388;
+            --ivory: #FEFAE0;
+            --light-gray: #D3D3D3;
+            --text-dark: #2e2e2e;
+            --text-light: #ffffff;
+        }
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--ivory);
+            color: var(--text-dark);
+            scroll-behavior: smooth;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            overflow-x: hidden;
+        }
+        .main-content-wrapper {
+            margin-left: 250px;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 250px;
+            height: 100vh;
+            background-color: var(--light-gray);
+            color: var(--text-dark);
+            padding: 20px 0;
+            box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+        }
+        nav .navbar-brand {
+            text-align: center;
+            display: block;
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin-bottom: 30px;
+            color: var(--text-dark);
+        }
+        nav .nav-link {
+            color: var(--text-dark);
+            font-weight: 500;
+            display: block;
+            margin: 10px 0;
+            padding: 10px 20px;
+            border-radius: 5px;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+        nav .nav-link:hover {
+            background-color: var(--olive-green);
+            color: var(--text-light);
+        }
+        nav .nav-link.active {
+            background-color: var(--olive-green);
+            color: var(--text-light);
+        }
+        header {
+            background-color: var(--copper-gold);
+            color: var(--text-light);
+            padding: 50px 50px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            text-align: center;
+            flex-shrink: 0;
+        }
+        header h1 {
+            font-size: 4rem;
+            font-weight: 600;
+        }
+        header p {
+            font-size: 1.2rem;
+            font-weight: 300;
+        }
+        section {
+            padding: 60px 50px;
+            flex-grow: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            text-align: left;
+        }
+        .report-detail-content {
+            background-color: var(--light-gray);
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+            width: 100%;
+            max-width: 900px;
+            line-height: 1.8;
+        }
+        .report-detail-content h2 {
+            color: var(--copper-gold);
+            margin-bottom: 25px;
+            text-align: center;
+        }
+        .report-detail-content h4 {
+            color: var(--olive-green);
+            margin-top: 30px;
+            margin-bottom: 15px;
+        }
+        .report-detail-content p, .report-detail-content ul, .report-detail-content ol {
+            margin-bottom: 15px;
+        }
+        .report-detail-content pre {
+            background-color: var(--text-dark);
+            color: var(--text-light);
+            padding: 15px;
+            border-radius: 5px;
+            overflow-x: auto;
+            margin-bottom: 20px;
+        }
+        footer {
+            background-color: var(--copper-gold);
+            color: var(--text-light);
+            padding: 20px 50px;
+            text-align: center;
+            width: 100%;
+            flex-shrink: 0;
+        }
+        @media (max-width: 768px) {
+            .main-content-wrapper {
+                margin-left: 0;
+            }
+            body {
+                display: block;
+            }
+            nav {
+                position: static;
+                width: 100%;
+                height: auto;
+                box-shadow: none;
+                padding: 10px 0;
+            }
+            nav .navbar-brand {
+                margin-bottom: 15px;
+            }
+            nav .nav-link {
+                text-align: center;
+                padding: 8px 15px;
+            }
+            header, section, footer {
+                padding: 30px 20px;
+                margin-left: 0;
+            }
+            header h1 {
+                font-size: 2.5rem;
+            }
+            header p {
+                font-size: 1rem;
+            }
+            .report-detail-content {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <a class="navbar-brand" href="index.html">Lara's Page</a>
+        <ul class="nav flex-column">
+            <li class="nav-item">
+                <a class="nav-link" href="index.html#about">About</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="index.html#skills">Skills</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="index.html#passion">Passion</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="index.html#Portofolio">Portofolio</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="index.html#pengalaman">Experience</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link active" href="laporanPraktikum.html">Laporan Praktikum</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="index.html#contact">Contact</a>
+            </li>
+        </ul>
+    </nav>
+
+    <div class="main-content-wrapper">
+        <header>
+            <div>
+                <h1>Laporan Praktikum 7 Pemrograman Web</h1>
+                <p>Konfigurasi Laravel</p>
+                <p>Hanifah Larama Agasi - 2311531002</p>
+            </div>
+        </header>
+
+        <section class="container my-5">
+            <div class="report-detail-content">
+                <h2>Detail Laporan</h2>
+                
+                <h4>A. Pendahuluan</h4>
+                    <p>Laravel adalah framework PHP yang populer yang dikembangkan oleh Taylor Otwell. Ini adalah proyek open source yang dimaksudkan untuk membuat aplikasi berbasis web dengan arsitektur Model-View-Controller (MVC).</p>
+                    <p>Beberapa fungsi Laravel:</p>
+                        <ul>
+                            <li>Eloquent ORM (Object-Relational Mapping): Memudahkan interaksi dengan database menggunakan sintaks PHP yang intuitif. Anda dapat mendefinisikan model untuk setiap tabel database dan melakukan operasi CRUD (Create, Read, Update, Delete) dengan mudah. Eloquent juga mendukung relasi antar tabel (one-to-one, one-to-many, many-to-many).</li>
+                            <li>Blade Templating Engine: Sistem templating yang sederhana namun powerful, memungkinkan Anda menggunakan sintaks PHP dalam template HTML dengan cara yang bersih dan aman. Blade menyediakan direktif-direktif seperti @if, @foreach, @extends, @yield, dan komponen untuk membuat tampilan dinamis.</li>
+                            <li>Artisan Console: Command-line interface (CLI) yang disertakan dengan Laravel. Artisan menyediakan banyak perintah berguna untuk otomatisasi tugas-tugas umum seperti membuat model, migration, controller, seeder, menjalankan pengujian, membersihkan cache, dan banyak lagi.</li>
+                            <li>Routing: Sistem perutean yang fleksibel memungkinkan Anda mendefinisikan URL aplikasi Anda dan mengaitkannya dengan controller atau closure functions. Laravel mendukung berbagai jenis rute dan middleware untuk mengontrol akses.</li>
+                            <li>Form Request Validation: Memudahkan proses validasi data yang dikirim melalui form. Anda dapat membuat kelas Form Request khusus dengan aturan validasi yang jelas dan Laravel akan secara otomatis menangani proses validasi dan menampilkan pesan kesalahan.</li>
+                            <li>Security: Laravel dibangun dengan mempertimbangkan keamanan. Beberapa fitur keamanan bawaan meliputi proteksi terhadap CSRF (Cross-Site Request Forgery), XSS (Cross-Site Scripting), dan SQL injection.</li>
+                            <li>Authentication & Authorization: Menyediakan sistem otentikasi (login, registrasi, lupa kata sandi) dan otorisasi (hak akses pengguna) yang mudah diimplementasikan. Laravel Breeze dan Jetstream menyediakan scaffolding UI untuk fitur-fitur ini.</li>
+                            <li>Testing: Dukungan bawaan untuk berbagai jenis pengujian, termasuk unit testing, integration testing, dan end-to-end testing. Laravel menyediakan helper functions dan assertion methods untuk memudahkan penulisan tes.</li>
+                            <li>Queues: Sistem antrian yang memungkinkan Anda menunda tugas-tugas yang memakan waktu (seperti pengiriman email atau pemrosesan data) dan menjalankannya di latar belakang. Ini meningkatkan responsivitas aplikasi Anda.</li>
+                            <li>Caching: Mendukung berbagai sistem caching (seperti Redis, Memcached, file) untuk meningkatkan performa aplikasi dengan menyimpan data yang sering diakses dalam memori.</li>
+                            <li>Events & Listeners: Implementasi dari pola Observer, memungkinkan Anda membuat event dan listener untuk menjalankan kode tertentu ketika event tersebut terjadi dalam aplikasi Anda.</li>
+                            <li>Notifications: Memudahkan pengiriman notifikasi ke berbagai saluran, seperti email, SMS, database, atau layanan pihak ketiga.</li>
+                            <li>Broadcasting: Memungkinkan Anda melakukan siaran event secara real-time melalui WebSockets. Ini berguna untuk fitur seperti live chat atau notifikasi real-time.</li>
+                            <li>Broadcasting: Memungkinkan Anda melakukan siaran event secara real-time melalui WebSockets. Ini berguna untuk fitur seperti live chat atau notifikasi real-time.</li>
+                            <li>Task Scheduling: Memungkinkan Anda menjadwalkan tugas-tugas cron menggunakan sintaks yang ekspresif dalam kode PHP Anda.</li>
+                            <li>Passport (OAuth2 Server): Paket resmi untuk mengimplementasikan otentikasi OAuth2, memungkinkan aplikasi Anda menjadi penyedia otentikasi untuk aplikasi lain.</li>
+                            <li>Sanctum (API Authentication): Paket ringan untuk mengimplementasikan sistem otentikasi berbasis token untuk Single-Page Applications (SPAs), mobile applications, dan simple APIs.</li>
+                            <li>Socialite (Social Authentication): Memudahkan integrasi otentikasi dengan berbagai penyedia layanan OAuth seperti Facebook, Twitter, Google, dan lainnya.</li>
+                            <li>Filesystem: Abstraksi untuk berinteraksi dengan berbagai sistem penyimpanan file, baik lokal maupun cloud (seperti Amazon S3 atau Google Cloud Storage).</li>
+                            <li>Mail: Memudahkan pengiriman email dengan dukungan untuk berbagai driver seperti SMTP, Mailgun, dan Amazon SES.</li>
+                            <li>Pusher (Realtime Services): Integrasi mudah dengan layanan Pusher untuk menambahkan fitur realtime ke aplikasi Anda.</li>
+                            <li>Localization: Memudahkan pembuatan aplikasi multibahasa dengan fitur untuk mengelola terjemahan.</li>
+                            <li>Packages: Ekosistem paket yang kaya dan berkembang pesat melalui Composer, memungkinkan Anda dengan mudah menambahkan fungsionalitas tambahan ke aplikasi Anda.</li>
+                        </ul>
+
+
+
+                <h4>B. Tujuan Praktikum</h4>
+                        <p>Tujuan praktikum ini yaitu mampu installasi Laravel, membuat project baru Laravel, mengenal struktur Laravel, konsep MVC laravel.</p>
+                    
+
+
+                <h4>C. Langkah-langkah</h4>
+                    <p>1. Sebelum memulai proyek Laravel pastikan 12 syarat ini sudah terpenuhi dan install beberapa tools yang perlukan yaitu Git, Composer dan Cmder (khusus windows)</p>
+                        <div class="row g-4">
+                        <div class="col-md-10">
+                            <div class="card shadow">
+                                <img src="img/pweb7/1.png" class="card-img-top" alt="Project 1" 
+                                    data-bs-toggle="modal" data-bs-target="#imageModal" onclick="showImage(this)">
+                                </div>
+                            </div>
+                        </div>
+
+
+                    <p> </p>
+                    <p>2. Kunjungi https://www.apachefriends.org/index.html untuk menginstal program XAMPP. Kita dapat menggunakan perintah berikut untuk mengecek PHP yang sudah terinstall dari XAMPP jika sudah terinstal:</p>
+                        <div class="row g-4">
+                        <div class="col-md-10">
+                            <div class="card shadow">
+                                <img src="img/pweb7/2.png" class="card-img-top" alt="Project 1" 
+                                    data-bs-toggle="modal" data-bs-target="#imageModal" onclick="showImage(this)">
+                                </div>
+                            </div>
+                        </div>
+
+
+                    <p> </p>
+                    <p>3. Setelah itu, pasang Composer di https://getcomposer.org/Composer-Setup.exe. Composer adalah pengendali paket PHP dan digunakan untuk menambahkan paket yang dibutuhkan selama pengembangan. Install wizard setup sesuai instruksi. Setelah proses instalasi selesai, kita dapat menggunakan perintah berikut untuk melihat apakah Composer telah terinstal:</p>
+                        <div class="row g-4">
+                        <div class="col-md-10">
+                            <div class="card shadow">
+                                <img src="img/pweb7/3.png" class="card-img-top" alt="Project 1" 
+                                    data-bs-toggle="modal" data-bs-target="#imageModal" onclick="showImage(this)">
+                                </div>
+                            </div>
+                        </div>
+
+
+                    <p> </p>
+                    <p>4. Kemudian, buka Git di https://git-scm.com/downloads/win dan ikuti instruksi langkah wizard instalasi yang diberikan. Setelah selesai, kita dapat mengecek Git yang telah terinstall dengan perintah berikut:</p>
+                        <div class="row g-4">
+                        <div class="col-md-10">
+                            <div class="card shadow">
+                                <img src="img/pweb7/4.png" class="card-img-top" alt="Project 1" 
+                                    data-bs-toggle="modal" data-bs-target="#imageModal" onclick="showImage(this)">
+                                </div>
+                            </div>
+                        </div>
+
+                        
+                    <p> </p>
+                    <p>5. Kemudian, install node.js dan npm di https://nodejs.org/. Node JS pada Laravel berfungsi untuk menangani masalah frontedn dan build asset UI (Library UI). Install sesuai ketentuan langkah wizard setup yang diberikan. Setelah instalasi, kita bisa mengecek node dan npm yang telah terinstall dengan command:</p>
+                        <div class="row g-4">
+                        <div class="col-md-10">
+                            <div class="card shadow">
+                                <img src="img/pweb7/5.png" class="card-img-top" alt="Project 1" 
+                                    data-bs-toggle="modal" data-bs-target="#imageModal" onclick="showImage(this)">
+                                </div>
+                            </div>
+                        </div>
+                    <p>Setelah selesai melakukan semua instalasi tersebut maka bisa lakukan pengecekan agar melihat semua persyaratan apakah sudah terpenuhi atau tidak, semua persyaratannya bisa dillihat pada langkah pertama</p>
+
+                    <p> </p>
+                    <p>6. Kita kemudian akan membuat proyek Laravel. Kita bisa membuatnya dengan installer atau composer.</p>
+                    <ul>
+                        <li>Laravel Installer</li>
+                            <div class="row g-4">
+                                <div class="col-md-10">
+                                    <div class="card shadow">
+                                        <img src="img/pweb7/6.png" class="card-img-top" alt="Project 1" 
+                                            data-bs-toggle="modal" data-bs-target="#imageModal" onclick="showImage(this)">
+                                    </div>
+                                </div>
+                            </div>
+                        <li>Composer</li>
+                        <div class="row g-4">
+                                <div class="col-md-10">
+                                    <div class="card shadow">
+                                        <img src="img/pweb7/7.png" class="card-img-top" alt="Project 1" 
+                                            data-bs-toggle="modal" data-bs-target="#imageModal" onclick="showImage(this)">
+                                    </div>
+                                </div>
+                            </div>
+                    </ul>
+
+
+                    <p> </p>
+                    <p>7. Praktikum kali ini akan menggunakan Composer. Kita akan menginstalnya dengan menggunakan perintah composer seperti yang ditunjukkan di atas. Hasilnya akan seperti ini.</p>
+                        <div class="row g-4">
+                        <div class="col-md-10">
+                            <div class="card shadow">
+                                <img src="img/pweb7/8.png" class="card-img-top" alt="Project 1" 
+                                    data-bs-toggle="modal" data-bs-target="#imageModal" onclick="showImage(this)">
+                                </div>
+                            </div>
+                        </div>
+
+
+                    <p> </p>
+                    <p>8. Setelah dilakukannya instalasi, maka bukalah folder laravel tersebut di VSCode dan jalankan di terminal dengan kode seperti ini</p>
+                        <div class="row g-4">
+                        <div class="col-md-10">
+                            <div class="card shadow">
+                                <img src="img/pweb7/9.png" class="card-img-top" alt="Project 1" 
+                                    data-bs-toggle="modal" data-bs-target="#imageModal" onclick="showImage(this)">
+                                </div>
+                            </div>
+                        </div>
+                    <p>untuk melihat hasilnya, bisa melakukannya dengan cara ctrl + klik pada link yg diberikan tersebut dan hasilnya bisa dilihat pada browser seperti ini :</p>
+                        <div class="row g-4">
+                        <div class="col-md-10">
+                            <div class="card shadow">
+                                <img src="img/pweb7/10.png" class="card-img-top" alt="Project 1" 
+                                    data-bs-toggle="modal" data-bs-target="#imageModal" onclick="showImage(this)">
+                                </div>
+                            </div>
+                        </div>
+
+                    <p> </p>
+                    <p>9. Yang akan dilakukan selanjutnya adalah menjalankan web yang sudah dibuat dengan cara pergi ke routes/web.php dan tambahkan kode berikut:</p>
+                        <div class="row g-4">
+                        <div class="col-md-10">
+                            <div class="card shadow">
+                                <img src="img/pweb7/11.png" class="card-img-top" alt="Project 1" 
+                                    data-bs-toggle="modal" data-bs-target="#imageModal" onclick="showImage(this)">
+                                </div>
+                            </div>
+                        </div>
+
+                    <p> </p>
+                    <p>10. Untuk mengakses hasil routing, pergi ke http://127.0.0.1:8000/helo. Hasilnya akan berikut:</p>
+                        <div class="row g-4">
+                        <div class="col-md-10">
+                            <div class="card shadow">
+                                <img src="img/pweb7/12.png" class="card-img-top" alt="Project 1" 
+                                    data-bs-toggle="modal" data-bs-target="#imageModal" onclick="showImage(this)">
+                                </div>
+                            </div>
+                        </div>
+
+
+                <p><a href="laporanPraktikum.html">Kembali ke Daftar Laporan</a></p>
+            </div>
+        </section>
+
+        <footer>
+            <p>&copy; 2024 Lara. Built with love and Bootstrap 5.</p>
+        </footer>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

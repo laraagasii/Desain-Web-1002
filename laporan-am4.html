@@ -1,0 +1,797 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Laporan Praktikum 3 - Aplikasi Mobile</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        :root {
+            --copper-gold: #B99470;
+            --olive-green: #A9B388;
+            --ivory: #FEFAE0;
+            --light-gray: #D3D3D3;
+            --text-dark: #2e2e2e;
+            --text-light: #ffffff;
+        }
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--ivory);
+            color: var(--text-dark);
+            scroll-behavior: smooth;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            overflow-x: hidden;
+        }
+        .main-content-wrapper {
+            margin-left: 250px;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 250px;
+            height: 100vh;
+            background-color: var(--light-gray);
+            color: var(--text-dark);
+            padding: 20px 0;
+            box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+        }
+        nav .navbar-brand {
+            text-align: center;
+            display: block;
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin-bottom: 30px;
+            color: var(--text-dark);
+        }
+        nav .nav-link {
+            color: var(--text-dark);
+            font-weight: 500;
+            display: block;
+            margin: 10px 0;
+            padding: 10px 20px;
+            border-radius: 5px;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+        nav .nav-link:hover {
+            background-color: var(--olive-green);
+            color: var(--text-light);
+        }
+        nav .nav-link.active {
+            background-color: var(--olive-green);
+            color: var(--text-light);
+        }
+        header {
+            background-color: var(--copper-gold);
+            color: var(--text-light);
+            padding: 50px 50px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            text-align: center;
+            flex-shrink: 0;
+        }
+        header h1 {
+            font-size: 4rem;
+            font-weight: 600;
+        }
+        header p {
+            font-size: 1.2rem;
+            font-weight: 300;
+        }
+        section {
+            padding: 60px 50px;
+            flex-grow: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            text-align: left;
+        }
+        .report-detail-content {
+            background-color: var(--light-gray);
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+            width: 100%;
+            max-width: 900px;
+            line-height: 1.8;
+        }
+        .report-detail-content h2 {
+            color: var(--copper-gold);
+            margin-bottom: 25px;
+            text-align: center;
+        }
+        .report-detail-content h4 {
+            color: var(--olive-green);
+            margin-top: 30px;
+            margin-bottom: 15px;
+        }
+        .report-detail-content p, .report-detail-content ul, .report-detail-content ol {
+            margin-bottom: 15px;
+        }
+        .report-detail-content pre {
+            background-color: var(--text-dark);
+            color: var(--text-light);
+            padding: 15px;
+            border-radius: 5px;
+            overflow-x: auto;
+            margin-bottom: 20px;
+        }
+        .report-detail-content img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 5px;
+            margin-top: 15px;
+        }
+        footer {
+            background-color: var(--copper-gold);
+            color: var(--text-light);
+            padding: 20px 50px;
+            text-align: center;
+            width: 100%;
+            flex-shrink: 0;
+        }
+
+        /* ====== OVERRIDE kecil agar gambar grid tampil lebar (full kontainer) ====== */
+        .report-detail-content .row.g-4 > .col-md-4 {
+            flex: 0 0 100%;
+            max-width: 100%;
+        }
+
+        @media (max-width: 768px) {
+            .main-content-wrapper { margin-left: 0; }
+            body { display: block; }
+            nav {
+                position: static;
+                width: 100%;
+                height: auto;
+                box-shadow: none;
+                padding: 10px 0;
+            }
+            nav .navbar-brand { margin-bottom: 15px; }
+            nav .nav-link { text-align: center; padding: 8px 15px; }
+            header, section, footer { padding: 30px 20px; margin-left: 0; }
+            header h1 { font-size: 2.5rem; }
+            header p { font-size: 1rem; }
+            .report-detail-content { padding: 20px; }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <a class="navbar-brand" href="index.html">Lara's Page</a>
+        <ul class="nav flex-column">
+            <li class="nav-item"><a class="nav-link" href="index.html#about">About</a></li>
+            <li class="nav-item"><a class="nav-link" href="index.html#skills">Skills</a></li>
+            <li class="nav-item"><a class="nav-link" href="index.html#passion">Passion</a></li>
+            <li class="nav-item"><a class="nav-link" href="index.html#Portofolio">Portofolio</a></li>
+            <li class="nav-item"><a class="nav-link" href="index.html#pengalaman">Experience</a></li>
+            <li class="nav-item"><a class="nav-link active" href="laporanPraktikum.html">Laporan Praktikum</a></li>
+            <li class="nav-item"><a class="nav-link" href="index.html#contact">Contact</a></li>
+        </ul>
+    </nav>
+
+    <div class="main-content-wrapper">
+        <header>
+            <div>
+                <h1>Praktikum 4: Navigation & Routing</h1>
+                <p>Mengelola Perpindahan Antar Halaman (Multiple Screen) di Flutter</p>
+            </div>
+        </header>
+
+        <section class="container my-5">
+            <div class="report-detail-content">
+                <h2>PRAKTIKUM 4</h2>
+                <p class="text-center"><b>Navigation & Routing: Multiple Screen</b></p>
+
+                <h4>1.1 Tujuan</h4>
+                <p>Tujuan praktikum ini yaitu mahasiswa mampu menguasai konsep Navigation dan Routing pada Flutter:</p>
+                <ul>
+                    <li>Membuat aplikasi yang dapat berpindah dari halaman satu ke halaman lain.</li>
+                    <li>Membuat aplikasi yang dapat mengirim dan menerima data dari halaman lain.</li>
+                </ul>
+
+                <h4>1.2 Alat</h4>
+                <ul>
+                    <li>Computer/laptop yang telah terinstall lingkungan flutter development.</li>
+                </ul>
+                
+                <h4>1.3 Teori</h4>
+                
+                <h5>Navigation dan Routing Flutter</h5>
+                <p><b>Navigasi</b> merupakan sebuah proses berpindah dari satu halaman (screen/page) ke halaman lain dalam sebuah aplikasi. Navigasi pada flutter menggunakan widget Navigator yang mana bekerja menggunakan konsep tumpukan (stack).</p>
+                <div class="img-placeholder" alt="Konsep Dasar Navigasi Flutter (Stack Push/Pop)"></div>
+                <ul>
+                    <li>Halaman awal aplikasi akan berada pada posisi dasar tumpukan.</li>
+                    <li>Ketika berpindah ke halaman baru, Flutter menggunakan perintah <b>push</b>, sehingga halaman baru akan berada di atas tumpukan halaman sebelumnya.</li>
+                    <li>Ketika kembali, Flutter menggunakan perintah <b>pop</b>, dan halaman teratas akan dikeluarkan dari tumpukan, menampilkan halaman sebelumnya.</li>
+                </ul>
+                <p><b>Routing</b> atau Rute adalah sebuah sistem yang digunakan untuk mendefinisikan dan mengelola routes dalam aplikasi. Setiap route didefinisikan sehingga ketika akan memanggil halaman cukup dengan memanggil nama route tersebut.</p>
+
+                <h5>Jenis Routing pada Flutter</h5>
+                <h6>Navigator (Anonymous Routes)</h6>
+                <p>Widget Navigation menampilkan halaman dengan konsep tumpukan menggunakan method seperti push() atau pop() secara langsung.</p>
+                <b>Push():</b>
+                <pre><code>Navigator.push(
+  context,
+  MaterialPageRoute(builder: (context) => const ProductDetail()),
+);</code></pre>
+                <b>Pop():</b>
+                <pre><code>Navigator.pop(context);</code></pre>
+                
+                <h6>Named Routes</h6>
+                <p>Named Routes atau Rute Bernama mengelola route pada widget MaterialApp kemudian memanggilnya berdasarkan nama yang telah diberikan.</p>
+                <b>Definisikan Routes pada MaterialApp:</b>
+                <pre><code>return MaterialApp(
+  initialRoute: '/',
+  routes: {
+    '/': (context) => const Product(),
+    '/product_detail': (context) => const ProductDetail(),
+  },
+);</code></pre>
+                <b>Menggunakan Named Routes:</b>
+                <pre><code>Navigator.pushNamed(context, '/product_detail');</code></pre>
+
+                <h5>Jenis Method Navigation</h5>
+                <h6>Push dan Pop</h6>
+                <pre><code>// Push - Menambahkan halaman baru
+Navigator.push(context, route);
+
+// Pop - Kembali ke halaman sebelumnya
+Navigator.pop(context);
+
+// Pop dengan mengirim data kembali
+Navigator.pop(context, 'data yang dikembalikan');</code></pre>
+                <h6>Push Replacement</h6>
+                <p>Mengganti halaman saat ini dengan halaman baru (halaman saat ini dihapus dari tumpukan).</p>
+                <pre><code>Navigator.pushReplacement(
+  context,
+  MaterialPageRoute(builder: (context) => LoginPage()),
+);</code></pre>
+                <h6>Push and Remove Until</h6>
+                <p>Mendorong halaman baru dan menghapus semua halaman sebelumnya dari tumpukan.</p>
+                <pre><code>Navigator.pushAndRemoveUntil(
+  context,
+  MaterialPageRoute(builder: (context) => HomePage()),
+  (route) => false, // Hapus semua
+);</code></pre>
+
+                <h5>Mengirim dan Menerima Data</h5>
+                <h6>Mengirim Data</h6>
+                <p>Data dapat dikirim melalui constructor atau melalui arguments pada named routes.</p>
+                <pre><code>// Dengan constructor
+Navigator.push(
+  context,
+  MaterialPageRoute(
+    builder: (context) => DetailPage(id: 123, name: 'Masnoer'),
+  ),
+);
+
+// Dengan named routes dan arguments
+Navigator.pushNamed(
+  context,
+  '/detail',
+  arguments: {'id': 123, 'name': 'Masnoer'},
+);</code></pre>
+
+                <h6>Menerima Data</h6>
+                <p>Data yang dikirim dapat diterima melalui constructor widget atau menggunakan `ModalRoute`.</p>
+                <b>Menerima dengan Constructor:</b>
+                <pre><code>class DetailPage extends StatelessWidget {
+  final int id;
+  final String name;
+
+  const DetailPage({super.key, required this.id, required this.name});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: Text('Detail: $name')),
+      body: Text('ID: $id'),
+    );
+  }
+}</code></pre>
+                <b>Menerima dengan ModalRoute.of(context):</b>
+                <pre><code>class DetailPage extends StatelessWidget {
+  const DetailPage({super.key});
+  @override
+  Widget build(BuildContext context) {
+    // Ambil arguments dari route
+    final args = ModalRoute.of(context)!.settings.arguments as Map;
+    
+    // Akses data
+    final int id = args['id'];
+    final String name = args['name'];
+
+    return Scaffold(
+      // ...
+    );
+  }
+}</code></pre>
+
+                <h4>1.4 Langkah-langkah</h4>
+                
+                <h5>Praktikum 1: Multiple Screen</h5>
+                <ol>
+                    <li>Buat file dart baru.</li>
+                    <li>Buat class menggunakan stateless widget dengan nama MyNav.</li>
+                    <li>Inisialisasi route pada MaterialApp.</li>
+                    <li>Buat class Product dan ProductDetail.</li>
+                </ol>
+                <h6>Kode Program Lengkap</h6>
+                <pre><code>import 'package:flutter/material.dart';
+
+void main() => runApp(const MyNav());
+
+class MyNav extends StatelessWidget {
+  const MyNav({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      initialRoute: '/',
+      routes: {
+        '/': (context) => const Product(),
+        '/product_detail': (context) => const ProductDetail(),
+      },
+    );
+  }
+}
+
+class Product extends StatelessWidget {
+  const Product({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Product'),
+      ),
+      body: Center(
+        child: ElevatedButton(
+          onPressed: () {
+            Navigator.pushNamed(context, '/product_detail');
+          },
+          child: const Text('Go to Product Detail'),
+        ),
+      ),
+    );
+  }
+}
+
+class ProductDetail extends StatelessWidget {
+  const ProductDetail({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Product Detail'),
+      ),
+      body: Center(
+        child: ElevatedButton(
+          onPressed: () {
+            Navigator.pop(context);
+          },
+          child: const Text('Back to Product'),
+        ),
+      ),
+    );
+  }
+}</code></pre>
+
+                <h5>Praktikum 2: Mengirim dan Menerima Data</h5>
+                <h6>1. Inisialisasi Route pada MaterialApp</h6>
+                <pre><code>return MaterialApp(
+  initialRoute: '/',
+  routes: {
+    '/': (context) => const HomePage(),
+    '/product': (context) => const MyProduct(),
+  },
+);</code></pre>
+
+                <h6>2. Pindah ke Halaman MyProfile (mengirim via constructor)</h6>
+                <p>Pada class HomePage, tambahkan tombol ini:</p>
+                <pre><code>ElevatedButton(
+  onPressed: () {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) =>
+            const MyProfile(id: 1, name: 'Masnoer'),
+      ),
+    );
+  },
+  child: const Text('Profile'),
+),</code></pre>
+                
+                <h6>3. Menerima Data pada MyProfile</h6>
+                <pre><code>class MyProfile extends StatelessWidget {
+  const MyProfile({super.key, required this.id, required this.name});
+  final int id;
+  final String name;
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Profile'),
+      ),
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text('ID: $id'),
+            Text('Name: $name'),
+          ],
+        ),
+      ),
+    );
+  }
+}</code></pre>
+
+                <h6>4. Pindah ke Halaman MyProduct (mengirim via arguments)</h6>
+                 <p>Pada class HomePage, tambahkan tombol ini:</p>
+                <pre><code>ElevatedButton(
+  onPressed: () {
+    Navigator.pushNamed(
+      context,
+      '/product',
+      arguments: {'id': 101, 'name': 'Laptop'},
+    );
+  },
+  child: const Text('Product'),
+),</code></pre>
+
+                <h6>5. Menerima Data pada MyProduct</h6>
+                <pre><code>class MyProduct extends StatelessWidget {
+  const MyProduct({super.key});
+  
+  @override
+  Widget build(BuildContext context) {
+    final args = ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>?;
+    final int id = args?['id'] ?? 0;
+    final String name = args?['name'] ?? 'Unknown';
+    
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Product'),
+      ),
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text('Product ID: $id'),
+            Text('Product Name: $name'),
+          ],
+        ),
+      ),
+    );
+  }
+}</code></pre>
+
+                <h4>1.5 Latihan/Tugas</h4><h5>Tugas 1: Halaman Login dan Halaman Utama</h5>
+        <p>Pada tugas ini, kita akan membuat alur login sederhana. Pengguna akan memasukkan username dan password di halaman login, kemudian data tersebut akan dikirim dan ditampilkan di halaman utama setelah tombol login ditekan.</p>
+        
+        <h6>Langkah Pengerjaan:</h6>
+        <ol>
+            <li>
+                <strong>Membuat Halaman Login (`login_page.dart`):</strong>
+                <ul>
+                    <li>Gunakan `StatefulWidget` untuk mengelola input dari `TextEditingController`.</li>
+                    <li>Buat dua `TextField` untuk username dan password.</li>
+                    <li>Buat sebuah `ElevatedButton` yang saat ditekan akan memanggil `Navigator.pushReplacement`. Kenapa `pushReplacement`? Agar pengguna tidak bisa kembali ke halaman login setelah berhasil masuk.</li>
+                    <li>Kirim data dari `TextEditingController` melalui <em>arguments</em> dari `pushReplacementNamed`.</li>
+                </ul>
+            </li>
+            <li>
+                <strong>Membuat Halaman Utama (`home_page.dart`):</strong>
+                <ul>
+                    <li>Buat `StatelessWidget` sederhana.</li>
+                    <li>Di dalam method `build`, ambil data yang dikirim dari halaman login menggunakan `ModalRoute.of(context)!.settings.arguments`.</li>
+                    <li>Tampilkan data username dan password yang telah diterima menggunakan widget `Text`.</li>
+                </ul>
+            </li>
+            <li>
+                <strong>Mengatur Rute (`main.dart`):</strong>
+                <ul>
+                    <li>Di dalam `MaterialApp`, definisikan `initialRoute` ke `'/login'`.</li>
+                    <li>Daftarkan kedua halaman (`LoginPage` dan `HomePage`) di dalam properti `routes`.</li>
+                </ul>
+            </li>
+        </ol>
+
+        <h6>Kode Program Lengkap:</h6>
+        <p>Berikut adalah kode untuk ketiga file yang dibutuhkan.</p>
+
+        <strong>File: `main.dart`</strong>
+        <pre><code>import 'package:flutter/material.dart';
+import 'login_page.dart';
+import 'home_page.dart';
+
+void main() {
+  runApp(const MyApp());
+}
+
+class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: 'Login App',
+      initialRoute: '/login', // Halaman awal adalah login
+      routes: {
+        '/login': (context) => const LoginPage(),
+        '/home': (context) => const HomePage(),
+      },
+    );
+  }
+}
+</code></pre>
+
+        <strong>File: `login_page.dart`</strong>
+        <pre><code>import 'package:flutter/material.dart';
+
+class LoginPage extends StatefulWidget {
+  const LoginPage({super.key});
+
+  @override
+  State<LoginPage> createState() => _LoginPageState();
+}
+
+class _LoginPageState extends State<LoginPage> {
+  final _usernameController = TextEditingController();
+  final _passwordController = TextEditingController();
+
+  @override
+  void dispose() {
+    _usernameController.dispose();
+    _passwordController.dispose();
+    super.dispose();
+  }
+
+  void _login() {
+    // Pindah ke halaman home dan kirim data
+    Navigator.pushReplacementNamed(
+      context,
+      '/home',
+      arguments: {
+        'username': _usernameController.text,
+        'password': _passwordController.text,
+      },
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Login'),
+      ),
+      body: Padding(
+        padding: const EdgeInsets.all(20.0),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            TextField(
+              controller: _usernameController,
+              decoration: const InputDecoration(
+                labelText: 'Username',
+                border: OutlineInputBorder(),
+              ),
+            ),
+            const SizedBox(height: 20),
+            TextField(
+              controller: _passwordController,
+              obscureText: true, // Untuk menyembunyikan password
+              decoration: const InputDecoration(
+                labelText: 'Password',
+                border: OutlineInputBorder(),
+              ),
+            ),
+            const SizedBox(height: 30),
+            ElevatedButton(
+              onPressed: _login,
+              child: const Text('Login'),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+</code></pre>
+
+        <strong>File: `home_page.dart`</strong>
+        <pre><code>import 'package:flutter/material.dart';
+
+class HomePage extends StatelessWidget {
+  const HomePage({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    // Terima data yang dikirim dari halaman login
+    final args = ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>?;
+    final String username = args?['username'] ?? 'Tidak ada username';
+    final String password = args?['password'] ?? 'Tidak ada password';
+
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Halaman Utama'),
+      ),
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            const Text(
+              'Selamat Datang!',
+              style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+            ),
+            const SizedBox(height: 20),
+            Text('Username: $username'),
+            Text('Password: $password'),
+          ],
+        ),
+      ),
+    );
+  }
+}
+</code></pre>
+
+        <hr>
+
+        <h5>Tugas 2: Contoh Navigasi dengan Bottom Navigation Bar</h5>
+        <p>Widget `BottomNavigationBar` adalah salah satu implementasi navigasi yang paling umum. Widget ini memungkinkan pengguna berpindah antar beberapa halaman utama (biasanya 3-5 halaman) dengan mudah dari bagian bawah layar.</p>
+        
+        <h6>Langkah Pengerjaan:</h6>
+        <ol>
+            <li>Buat sebuah `StatefulWidget` sebagai halaman utama yang akan menampung `BottomNavigationBar`.</li>
+            <li>Buat sebuah `List` yang berisi widget-widget untuk setiap halaman (misalnya Halaman Beranda, Pencarian, dan Profil).</li>
+            <li>Buat sebuah variabel `_selectedIndex` untuk melacak tab mana yang sedang aktif.</li>
+            <li>Gunakan `Scaffold` dan pada properti `body`, tampilkan widget dari `List` berdasarkan `_selectedIndex`.</li>
+            <li>Pada properti `bottomNavigationBar`, buat sebuah `BottomNavigationBar` dengan `items` (daftar `BottomNavigationBarItem`).</li>
+            <li>Atur `currentIndex` ke `_selectedIndex` dan implementasikan method `onTap` untuk mengubah nilai `_selectedIndex` di dalam `setState`.</li>
+        </ol>
+
+        <h6>Kode Program Lengkap:</h6>
+        <p>Kode ini digabungkan dalam satu file `main.dart` untuk kemudahan.</p>
+        <pre><code>import 'package:flutter/material.dart';
+
+void main() {
+  runApp(const MyApp());
+}
+
+class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return const MaterialApp(
+      title: 'Bottom Nav Example',
+      home: MainScreen(), // Halaman utama kita
+    );
+  }
+}
+
+// Halaman-halaman dummy untuk ditampilkan
+class HomeScreen extends StatelessWidget {
+  const HomeScreen({super.key});
+  @override
+  Widget build(BuildContext context) {
+    return const Center(child: Text('Halaman Beranda', style: TextStyle(fontSize: 24)));
+  }
+}
+
+class SearchScreen extends StatelessWidget {
+  const SearchScreen({super.key});
+  @override
+  Widget build(BuildContext context) {
+    return const Center(child: Text('Halaman Pencarian', style: TextStyle(fontSize: 24)));
+  }
+}
+
+class ProfileScreen extends StatelessWidget {
+  const ProfileScreen({super.key});
+  @override
+  Widget build(BuildContext context) {
+    return const Center(child: Text('Halaman Profil', style: TextStyle(fontSize: 24)));
+  }
+}
+
+
+// Widget utama yang menampung BottomNavigationBar
+class MainScreen extends StatefulWidget {
+  const MainScreen({super.key});
+
+  @override
+  State<MainScreen> createState() => _MainScreenState();
+}
+
+class _MainScreenState extends State<MainScreen> {
+  int _selectedIndex = 0; // Indeks tab yang aktif
+
+  // Daftar halaman yang akan ditampilkan
+  static const List&lt;Widget&gt; _widgetOptions = &lt;Widget&gt;[
+    HomeScreen(),
+    SearchScreen(),
+    ProfileScreen(),
+  ];
+
+  void _onItemTapped(int index) {
+    setState(() {
+      _selectedIndex = index; // Update state saat item di-tap
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Contoh Bottom Navigation Bar'),
+      ),
+      body: _widgetOptions.elementAt(_selectedIndex), // Tampilkan halaman sesuai indeks
+      bottomNavigationBar: BottomNavigationBar(
+        items: const &lt;BottomNavigationBarItem&gt;[
+          BottomNavigationBarItem(
+            icon: Icon(Icons.home),
+            label: 'Beranda',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.search),
+            label: 'Cari',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.person),
+            label: 'Profil',
+          ),
+        ],
+        currentIndex: _selectedIndex, // Item yang sedang aktif
+        selectedItemColor: Colors.amber[800], // Warna item aktif
+        onTap: _onItemTapped, // Method yang dipanggil saat item di-tap
+      ),
+    );
+  }
+}
+</code></pre>
+    </div>
+
+            <p class="mt-4"><a href="laporanPraktikum.html">Kembali ke Daftar Laporan</a></p>
+                </div>
+            </section>
+
+            <footer>
+                <p>&copy; 2024 Lara. Built with love and Bootstrap 5.</p>
+            </footer>
+        </div>
+
+        <!-- Modal Gambar -->
+        <div class="modal fade" id="imageModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-xl">
+            <div class="modal-content bg-transparent border-0">
+            <img id="modalImage" class="img-fluid rounded" alt="Preview">
+            </div>
+        </div>
+        </div>
+
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+        <script>
+        // Fungsi untuk menampilkan gambar ke modal (dipanggil dari onclick pada <img>)
+        function showImage(imgEl) {
+            const modalImg = document.getElementById('modalImage');
+            modalImg.src = imgEl.src;
+            modalImg.alt = imgEl.alt || 'Preview';
+        }
+        </script>
+    </body>
+    </html>

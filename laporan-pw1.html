@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Laporan Praktikum 6 - Pemrograman Web</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        :root {
+            --copper-gold: #B99470;
+            --olive-green: #A9B388;
+            --ivory: #FEFAE0;
+            --light-gray: #D3D3D3;
+            --text-dark: #2e2e2e;
+            --text-light: #ffffff;
+        }
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--ivory);
+            color: var(--text-dark);
+            scroll-behavior: smooth;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            overflow-x: hidden;
+        }
+        .main-content-wrapper {
+            margin-left: 250px;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 250px;
+            height: 100vh;
+            background-color: var(--light-gray);
+            color: var(--text-dark);
+            padding: 20px 0;
+            box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+        }
+        nav .navbar-brand {
+            text-align: center;
+            display: block;
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin-bottom: 30px;
+            color: var(--text-dark);
+        }
+        nav .nav-link {
+            color: var(--text-dark);
+            font-weight: 500;
+            display: block;
+            margin: 10px 0;
+            padding: 10px 20px;
+            border-radius: 5px;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+        nav .nav-link:hover {
+            background-color: var(--olive-green);
+            color: var(--text-light);
+        }
+        nav .nav-link.active {
+            background-color: var(--olive-green);
+            color: var(--text-light);
+        }
+        header {
+            background-color: var(--copper-gold);
+            color: var(--text-light);
+            padding: 50px 50px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            text-align: center;
+            flex-shrink: 0;
+        }
+        header h1 {
+            font-size: 4rem;
+            font-weight: 600;
+        }
+        header p {
+            font-size: 1.2rem;
+            font-weight: 300;
+        }
+        section {
+            padding: 60px 50px;
+            flex-grow: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            text-align: left;
+        }
+        .report-detail-content {
+            background-color: var(--light-gray);
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+            width: 100%;
+            max-width: 900px;
+            line-height: 1.8;
+        }
+        .report-detail-content h2 {
+            color: var(--copper-gold);
+            margin-bottom: 25px;
+            text-align: center;
+        }
+        .report-detail-content h4 {
+            color: var(--olive-green);
+            margin-top: 30px;
+            margin-bottom: 15px;
+        }
+        .report-detail-content p, .report-detail-content ul, .report-detail-content ol {
+            margin-bottom: 15px;
+        }
+        .report-detail-content pre {
+            background-color: var(--text-dark);
+            color: var(--text-light);
+            padding: 15px;
+            border-radius: 5px;
+            overflow-x: auto;
+            margin-bottom: 20px;
+        }
+        footer {
+            background-color: var(--copper-gold);
+            color: var(--text-light);
+            padding: 20px 50px;
+            text-align: center;
+            width: 100%;
+            flex-shrink: 0;
+        }
+        @media (max-width: 768px) {
+            .main-content-wrapper {
+                margin-left: 0;
+            }
+            body {
+                display: block;
+            }
+            nav {
+                position: static;
+                width: 100%;
+                height: auto;
+                box-shadow: none;
+                padding: 10px 0;
+            }
+            nav .navbar-brand {
+                margin-bottom: 15px;
+            }
+            nav .nav-link {
+                text-align: center;
+                padding: 8px 15px;
+            }
+            header, section, footer {
+                padding: 30px 20px;
+                margin-left: 0;
+            }
+            header h1 {
+                font-size: 2.5rem;
+            }
+            header p {
+                font-size: 1rem;
+            }
+            .report-detail-content {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <a class="navbar-brand" href="index.html">Lara's Page</a>
+        <ul class="nav flex-column">
+            <li class="nav-item">
+                <a class="nav-link" href="index.html#about">About</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="index.html#skills">Skills</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="index.html#passion">Passion</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="index.html#Portofolio">Portofolio</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="index.html#pengalaman">Experience</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link active" href="laporanPraktikum.html">Laporan Praktikum</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="index.html#contact">Contact</a>
+            </li>
+        </ul>
+    </nav>
+
+    <div class="main-content-wrapper">
+        <header>
+            <div>
+                <h1>Laporan Praktikum 6 Pemrograman Web</h1>
+                <p>CRUD Sederhana OOP PHP & MySQL</p>
+                <p>Hanifah Larama Agasi - 2311531002</p>
+            </div>
+        </header>
+
+        <section class="container my-5">
+            <div class="report-detail-content">
+                <h2>Detail Laporan</h2>
+                
+                <h4>A. Konsep OOP</h4>
+                <p>1. Class – Template untuk membuat banyak instance dari tipe objek tertentu.</p>
+                <p>2. Object – Instance individual dari struktur data yang didefinisikan oleh class.</p>
+                <p>3. Member Variable – Variabel yang didefinisikan di dalam class dan digunakan dalam fungsi anggota.</p>
+                <p>4. Member Function – Fungsi di dalam class untuk mengakses data.</p>
+                <p>5. Inheritance – Pewarisan fungsi dari class induk ke class anak.</p>
+                <p>6. Parent Class − Sebuah kelas yang diwarisi oleh kelas lain. Ini juga disebut kelas dasar atau kelas super.</p>
+                <p>7. Child Class – Sebuah kelas yang mewarisi dari kelas lain. Ini juga disebut subclass atau kelas turunan.</p>
+                <p>8. Polymorphism – Sejenis polimorfisme di mana beberapa atau semua operator memiliki implementasi yang berbeda tergantung pada tipe argumen mereka. Dengan cara yang sama, fungsi juga dapat di-overload dengan implementasi yang berbeda.</p>
+                <p>9. Data Abstraction – Setiap representasi data di mana detail implementasinya tersembunyi.</p>
+                <p>10. Encapsulation – Mengacu pada sebuah konsep di mana kita mengenkapsulasi semua data dan fungsi anggota bersama untuk membentuk sebuah objek.</p>
+                <p>11. Constructor – Merujuk pada jenis fungsi khusus yang akan dipanggil secara otomatis setiap kali ada pembentukan objek dari sebuah kelas.</p>
+                <p>12. Destructor – Merujuk pada jenis fungsi khusus yang akan dipanggil secara otomatis setiap kali sebuah objek dihapus atau keluar dari lingkup.</p>
+                    
+
+                <h4>B. Langkah-langkah</h4>
+                    <p>1. Buat folder baru dengan nama crud dan struktur file seperti berikut</p>
+                        <div class="row g-4">
+                        <div class="col-md-4">
+                            <div class="card shadow">
+                                <img src="img/pweb1/1struktur.png" class="card-img-top" alt="Project 1" 
+                                    data-bs-toggle="modal" data-bs-target="#imageModal" onclick="showImage(this)">
+                                </div>
+                            </div>
+                        </div>
+
+
+                <p> </p>
+                <p>2. Download file css dan js bootstrap pada link berikut.</p>
+                    <ul>
+                        <li>CSS: https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css</li>
+                        <li>https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js</li>
+                    </ul>
+                
+
+                <p> </p>
+                <p>3. Buat database dengan nama pemrograman_web dan tambahkan id, nim, nama, dan jurusan.</p>
+                    <div class="row g-4">
+                        <div class="col-md-10">
+                            <div class="card shadow">
+                                <img src="img/pweb1/2query.png" class="card-img-top"
+                                    data-bs-toggle="modal" data-bs-target="#imageModal" onclick="showImage(this)">
+                                </div>
+                            </div>
+                        </div>
+                    <ul>
+                        <p> </p>
+                            <li>Hingga membentuk tabel dengan struktur berikut</li>
+                    </ul>
+                        <div class="row g-4">
+                            <div class="col-md-10">
+                                <div class="card shadow">
+                                    <img src="img/pweb1/3tabel.png" class="card-img-top"
+                                        data-bs-toggle="modal" data-bs-target="#imageModal" onclick="showImage(this)">
+                                    </div>
+                                </div>
+                        </div>
+
+                <p> </p>
+                <p>4. Pada folder config, buat file dengan nama database</p>
+                        <div class="row g-4">
+                        <div class="col-md-10">
+                            <div class="card shadow">
+                                <img src="img/pweb1/4database.png" class="card-img-top"
+                                    data-bs-toggle="modal" data-bs-target="#imageModal" onclick="showImage(this)">
+                                </div>
+                            </div>
+                        </div>
+
+                <p> </p>
+                <p>5. Buat file baru dengan nama Config.php pada folder config untuk membuat variabel constan bisa terhubung, dibuat koneksinya agar dapat diakses dari kelas manapun</p>
+                        <div class="row g-4">
+                        <div class="col-md-10">
+                            <div class="card shadow">
+                                <img src="img/pweb1/5config.png" class="card-img-top"
+                                    data-bs-toggle="modal" data-bs-target="#imageModal" onclick="showImage(this)">
+                                </div>
+                            </div>
+                        </div>
+                        
+                <p> </p>
+                <p>6. Selanjutanya buat file baru dengan nama alert yang fungsinya untuk membuat sebuah function yang berfungsi untuk menampilkan pesan Ketika melakukan operasi terhadap data, fungsi ini memiliki 2 buah argument statement yaitu $msg yang berisi pesan dan $sts yang berisi kode jika status 1 maka pesan berhasil dan jika 0 maka pesan gagal. Berikut kode program fungsi alert.</p>
+                        <div class="row g-4">
+                        <div class="col-md-10">
+                            <div class="card shadow">
+                                <img src="img/pweb1/6alert.png" class="card-img-top"
+                                    data-bs-toggle="modal" data-bs-target="#imageModal" onclick="showImage(this)">
+                                </div>
+                            </div>
+                        </div>
+
+                <p> </p>
+                <p>7. Buat model mahasiswa yang nantinya akan digunakan untuk menjalankan fungsi crud</p>
+                    <div class="row g-4">
+                        <div class="col-md-10">
+                            <div class="card shadow">
+                                <img src="img/pweb1/7mahasiswa.png" class="card-img-top"
+                                    data-bs-toggle="modal" data-bs-target="#imageModal" onclick="showImage(this)">
+                                </div>
+                            </div>
+                        </div>
+                    <ul>
+                        <p> </p>
+                            <li>Fungsi create yang nantinya digunakan untuk menambahkan data mahasiswa</li>
+                    </ul>
+                        <div class="row g-4">
+                            <div class="col-md-10">
+                                <div class="card shadow">
+                                    <img src="img/pweb1/7mahasiswa1.png" class="card-img-top"
+                                        data-bs-toggle="modal" data-bs-target="#imageModal" onclick="showImage(this)">
+                                    </div>
+                                </div>
+                        </div>
+                    <ul>
+                        <p> </p>
+                            <li>Fungsi read untuk menampilkan data mahasiswa</li>
+                    </ul>
+                        <div class="row g-4">
+                            <div class="col-md-10">
+                                <div class="card shadow">
+                                    <img src="img/pweb1/7mahasiswa2.png" class="card-img-top" 
+                                        data-bs-toggle="modal" data-bs-target="#imageModal" onclick="showImage(this)">
+                                    </div>
+                                </div>
+                        </div>
+                    <ul>
+                        <p> </p>
+                            <li>Fungsi update untuk melakukan perubahan data mahasiswa berdasarkan ID mahasiswa</li>
+                    </ul>
+                        <div class="row g-4">
+                            <div class="col-md-10">
+                                <div class="card shadow">
+                                    <img src="img/pweb1/7mahasiswa3.png" class="card-img-top" 
+                                        data-bs-toggle="modal" data-bs-target="#imageModal" onclick="showImage(this)">
+                                    </div>
+                                </div>
+                        </div>
+                    <ul>
+                        <p> </p>
+                            <li>Fungsi delete untuk menghapus data mahasiswa berdasarkan ID</li>
+                    </ul>
+                        <div class="row g-4">
+                            <div class="col-md-10">
+                                <div class="card shadow">
+                                    <img src="img/pweb1/7mahasiswa4.png" class="card-img-top"
+                                        data-bs-toggle="modal" data-bs-target="#imageModal" onclick="showImage(this)">
+                                    </div>
+                                </div>
+                        </div>
+
+
+                <p> </p>
+                <p>8. Membuat fungsi mahasiswa untuk menghubungkan model mahasiswa dengan view</p>
+                        <div class="row g-4">
+                        <div class="col-md-10">
+                            <div class="card shadow">
+                                <img src="img/pweb1/8mahasiswa.png" class="card-img-top" 
+                                    data-bs-toggle="modal" data-bs-target="#imageModal" onclick="showImage(this)">
+                                </div>
+                            </div>
+                        </div>
+
+
+                <p> </p>
+                <p>9. Selanjutnya membuat view yang mencakup index, edit, dan create. Pada index berisi tampilan yang nantinya menampilkan data-data mahasiswa yang sudah diinputkan ke database</p>
+                    <div class="row g-4">
+                        <div class="col-md-10">
+                            <div class="card shadow">
+                                <img src="img/pweb1/9index1.png" class="card-img-top"
+                                    data-bs-toggle="modal" data-bs-target="#imageModal" onclick="showImage(this)">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row g-4">
+                            <div class="col-md-10">
+                                <div class="card shadow">
+                                    <img src="img/pweb1/9index2.png" class="card-img-top" 
+                                        data-bs-toggle="modal" data-bs-target="#imageModal" onclick="showImage(this)">
+                                    </div>
+                                </div>
+                        </div>
+                        <div class="row g-4">
+                            <div class="col-md-10">
+                                <div class="card shadow">
+                                    <img src="img/pweb1/9index3.png" class="card-img-top" 
+                                        data-bs-toggle="modal" data-bs-target="#imageModal" onclick="showImage(this)">
+                                    </div>
+                                </div>
+                        </div>
+
+
+                <p> </p>
+                <p>10. Untuk menampilkan tampilan edit yang berguna untuk mengedit data mahasiswa yang sudah kita pilih</p>
+                        <div class="row g-4">
+                        <div class="col-md-10">
+                            <div class="card shadow">
+                                <img src="img/pweb1/10edit.png" class="card-img-top" 
+                                    data-bs-toggle="modal" data-bs-target="#imageModal" onclick="showImage(this)">
+                                </div>
+                            </div>
+                        </div>
+
+
+                <p> </p>
+                <p>11. Untuk menambahkan data mahasiswa baru, buat tampilan create untuk menambahkan data</p>
+                        <div class="row g-4">
+                        <div class="col-md-10">
+                            <div class="card shadow">
+                                <img src="img/pweb1/11create.png" class="card-img-top" 
+                                    data-bs-toggle="modal" data-bs-target="#imageModal" onclick="showImage(this)">
+                                </div>
+                            </div>
+                        </div>
+
+
+
+                <p> </p>
+                <h4>C. Optimalisasi CRUD</h4>
+                <p>CRUD sederhana ini ditambahkan dengan desain yang dinamis dan menarik. Juga sudah dilengkapi dengan notifikasi untuk memastikan apakah file benar-benar ingin dihapus</p>
+                    <div class="row g-4">
+                        <div class="col-md-10">
+                            <div class="card shadow">
+                                <img src="img/pweb1/1.png" class="card-img-top" 
+                                    data-bs-toggle="modal" data-bs-target="#imageModal" onclick="showImage(this)">
+                                </div>
+                            </div>
+                        </div>
+                    <div class="row g-4">
+                        <div class="col-md-10">
+                            <div class="card shadow">
+                                <img src="img/pweb1/2.png" class="card-img-top" 
+                                    data-bs-toggle="modal" data-bs-target="#imageModal" onclick="showImage(this)">
+                                </div>
+                            </div>
+                        </div>
+                    <div class="row g-4">
+                        <div class="col-md-10">
+                            <div class="card shadow">
+                                <img src="img/pweb1/3.png" class="card-img-top" 
+                                    data-bs-toggle="modal" data-bs-target="#imageModal" onclick="showImage(this)">
+                                </div>
+                            </div>
+                        </div>
+                    <div class="row g-4">
+                        <div class="col-md-10">
+                            <div class="card shadow">
+                                <img src="img/pweb1/4.png" class="card-img-top" 
+                                    data-bs-toggle="modal" data-bs-target="#imageModal" onclick="showImage(this)">
+                                </div>
+                            </div>
+                        </div>
+                    <div class="row g-4">
+                        <div class="col-md-10">
+                            <div class="card shadow">
+                                <img src="img/pweb1/5.png" class="card-img-top" 
+                                    data-bs-toggle="modal" data-bs-target="#imageModal" onclick="showImage(this)">
+                                </div>
+                            </div>
+                        </div>
+                    <div class="row g-4">
+                        <div class="col-md-10">
+                            <div class="card shadow">
+                                <img src="img/pweb1/6.png" class="card-img-top" 
+                                    data-bs-toggle="modal" data-bs-target="#imageModal" onclick="showImage(this)">
+                                </div>
+                            </div>
+                        </div>
+
+
+                <p><a href="laporanPraktikum.html">Kembali ke Daftar Laporan</a></p>
+            </div>
+        </section>
+
+        <footer>
+            <p>&copy; 2024 Lara. Built with love and Bootstrap 5.</p>
+        </footer>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
